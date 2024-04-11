@@ -1,5 +1,4 @@
-#include <iostream>
-
+#include "Core/Core.h"
 #include "framework/Application.h"
 
 namespace ly
@@ -32,12 +31,12 @@ namespace ly
 				TickInternal(m_TargetDeltaTime);
 				RenderInternal();
 			}
+			LOG("Framerate in ms: %f", 1.f / frameDeltaTime);
 		}
 	}
 
 	void Application::Tick(float deltaTime)
 	{
-		std::cout << "Framerate: " << 1.f / deltaTime << "\n";
 	}
 
 	void Application::Render()

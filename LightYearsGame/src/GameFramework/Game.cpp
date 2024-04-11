@@ -1,4 +1,4 @@
-#include <Core/Core.h>
+#include <LightYears.h>
 #include "GameFramework/Game.h"
 
 ly::Application* ly::CreateApplication()
