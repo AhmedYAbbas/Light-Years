@@ -4,8 +4,8 @@
 
 namespace ly
 {
-	Application::Application()
-		: m_Window{sf::VideoMode(600, 800), "LightYears"}, m_TickClock {}, m_TargetFrameRate{60.f}, m_TargetDeltaTime{1.f / m_TargetFrameRate}, m_CurrentWorld{nullptr}
+	Application::Application(unsigned int windowWidth, unsigned int windowHeight, const std::string& title, uint32_t style)
+		: m_Window{sf::VideoMode(windowWidth, windowHeight), title, style}, m_TickClock {}, m_TargetFrameRate{60.f}, m_TargetDeltaTime{1.f / m_TargetFrameRate}, m_CurrentWorld{nullptr}
 	{
 	}
 
@@ -40,7 +40,7 @@ namespace ly
 		Tick(deltaTime);
 		if (m_CurrentWorld)
 		{
-			m_CurrentWorld->Tick(deltaTime);
+			m_CurrentWorld->TickInternal(deltaTime);
 		}
 	}
 
@@ -53,12 +53,8 @@ namespace ly
 
 	void Application::Render()
 	{
-		sf::RectangleShape rect{sf::Vector2f{100.f, 100.f}};
-		rect.setOrigin(50.f, 50.f);
-		rect.setFillColor(sf::Color::Green);
-		rect.setPosition(m_Window.getSize().x / 2.f, m_Window.getSize().y / 2.f);
-
-		m_Window.draw(rect);
+		if (m_CurrentWorld)
+			m_CurrentWorld->Render(m_Window);
 	}
 
 	void Application::Tick(float deltaTime)

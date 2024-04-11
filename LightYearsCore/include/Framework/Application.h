@@ -10,7 +10,7 @@ namespace ly
 	class Application
 	{
 	public:
-		Application();
+		Application(unsigned int windowWidth, unsigned int windowHeight, const std::string& title, uint32_t style);
 		virtual ~Application() = default;
 		
 		void Run();
@@ -20,7 +20,7 @@ namespace ly
 		{
 			Ref<T> newWorld = CreateRef<T>();
 			m_CurrentWorld = newWorld;
-			m_CurrentWorld->BeginPlay();
+			m_CurrentWorld->BeginPlayInternal();
 			return newWorld;
 		}
 

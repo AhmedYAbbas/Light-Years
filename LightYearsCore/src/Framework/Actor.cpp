@@ -15,22 +15,41 @@ namespace ly
 	void Actor::BeginPlayInternal()
 	{
 		if (!m_HasBegunPlay)
+		{
 			m_HasBegunPlay = true;
+			BeginPlay();
+		}
 	}
 
 	void Actor::TickInternal(float deltaTime)
 	{
+		if (!IsPendingDestroy())
+			Tick(deltaTime);
+	}
+
+	void Actor::Render(sf::RenderWindow& window)
+	{
+		if (IsPendingDestroy())
+			return;
+
+		window.draw(m_Sprite);
 	}
 
 	void Actor::BeginPlay()
 	{
-		BeginPlayInternal();
 		LOG("Actor Began Play!");
 	}
 
 	void Actor::Tick(float deltaTime)
 	{
-		TickInternal(deltaTime);
 		LOG("Actor is ticking.");
+	}
+
+	void Actor::SetTexture(const std::string& filepath)
+	{
+		if (m_Texture.loadFromFile(filepath))
+		{
+			m_Sprite.setTexture(m_Texture, true);
+		}
 	}
 }

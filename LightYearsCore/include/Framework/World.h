@@ -1,5 +1,7 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
+
 #include "Core/Core.h"
 
 namespace ly
@@ -12,8 +14,9 @@ namespace ly
 		World();
 		virtual ~World() = default;
 
-		void BeginPlay();
-		void Tick(float deltaTime);
+		void BeginPlayInternal();
+		void TickInternal(float deltaTime);
+		void Render(sf::RenderWindow& window);
 
 		template<typename T>
 		WeakRef<T> SpawnActor()
@@ -24,8 +27,8 @@ namespace ly
 		}
 
 	private:
-		void BeginPlayInternal();
-		void TickInternal(float deltaTime);
+		void BeginPlay();
+		void Tick(float deltaTime);
 		
 	private:
 		Vector<Ref<Actor>> m_Actors;

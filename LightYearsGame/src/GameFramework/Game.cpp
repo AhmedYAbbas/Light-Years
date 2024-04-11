@@ -8,10 +8,12 @@ ly::Application* ly::CreateApplication()
 }
 
 Game::Game()
+	: Application{600, 980, "Light Years", sf::Style::Close | sf::Style::Titlebar}
 {
 	WeakRef<ly::World> world = LoadWorld<ly::World>();
 	world.lock()->SpawnActor<ly::Actor>();
 	actorToDestroy = world.lock()->SpawnActor<ly::Actor>();
+	actorToDestroy.lock()->SetTexture("assets/SpaceShooterRedux/PNG/playerShip1_blue.png");
 }
 
 void Game::Render()
