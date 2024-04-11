@@ -20,7 +20,7 @@ namespace ly
 		{
 			Ref<T> newWorld = CreateRef<T>();
 			m_CurrentWorld = newWorld;
-			m_CurrentWorld->BeginPlayInternal();
+			m_CurrentWorld->BeginPlay();
 			return newWorld;
 		}
 

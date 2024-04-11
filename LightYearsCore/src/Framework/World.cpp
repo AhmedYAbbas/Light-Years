@@ -1,34 +1,43 @@
 #include "Framework/World.h"
-#include "Core/Core.h"
+#include "Framework/Actor.h"
 
 namespace ly
 {
 	World::World()
-		: m_BeganPlay{false}
+		: m_HasBegunPlay{false}
 	{
 	}
 
 	void World::BeginPlayInternal()
 	{
-		if (!m_BeganPlay)
+		if (!m_HasBegunPlay)
 		{
-			m_BeganPlay = true;
-			BeginPlay();
+			m_HasBegunPlay = true;
 		}
 	}
 
 	void World::TickInternal(float deltaTime)
 	{
-		Tick(deltaTime);
+		LOG("Tick at framerate %f", 1.f / deltaTime);
+		for (auto& actor : m_PendingActors)
+		{
+			m_Actors.push_back(actor);
+			actor->BeginPlay();
+		}
+		m_PendingActors.clear();
+
+		for (auto& actor : m_Actors)
+			actor->Tick(deltaTime);
 	}
 
 	void World::BeginPlay()
 	{
+		BeginPlayInternal();
 		LOG("Begin Play!");
 	}
 
 	void World::Tick(float deltaTime)
 	{
-		LOG("Tick at framerate %f", 1.f / deltaTime);
+		TickInternal(deltaTime);
 	}
 }

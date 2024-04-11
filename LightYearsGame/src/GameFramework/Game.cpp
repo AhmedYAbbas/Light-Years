@@ -9,7 +9,17 @@ ly::Application* ly::CreateApplication()
 
 Game::Game()
 {
-	LoadWorld<ly::World>();
+	WeakRef<ly::World> world = LoadWorld<ly::World>();
+	world.lock()->SpawnActor<ly::Actor>();
+	world.lock()->SpawnActor<ly::Actor>();
+	world.lock()->SpawnActor<ly::Actor>();
+	world.lock()->SpawnActor<ly::Actor>();
+	world.lock()->SpawnActor<ly::Actor>();
+	world.lock()->SpawnActor<ly::Actor>();
+	world.lock()->SpawnActor<ly::Actor>();
+	world.lock()->SpawnActor<ly::Actor>();
+	world.lock()->SpawnActor<ly::Actor>();
+	world.lock()->SpawnActor<ly::Actor>();
 }
 
 void Game::Render()
