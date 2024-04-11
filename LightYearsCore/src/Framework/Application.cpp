@@ -1,10 +1,11 @@
 #include "Core/Core.h"
-#include "framework/Application.h"
+#include "Framework/Application.h"
+#include "Framework/World.h"
 
 namespace ly
 {
 	Application::Application()
-		: m_Window{sf::VideoMode(600, 800), "LightYears"}, m_TargetFrameRate{60.f}, m_TargetDeltaTime{1.f / m_TargetFrameRate}, m_TickClock {}
+		: m_Window{sf::VideoMode(600, 800), "LightYears"}, m_TickClock {}, m_TargetFrameRate{60.f}, m_TargetDeltaTime{1.f / m_TargetFrameRate}, m_CurrentWorld{nullptr}
 	{
 	}
 
@@ -31,27 +32,17 @@ namespace ly
 				TickInternal(m_TargetDeltaTime);
 				RenderInternal();
 			}
-			LOG("Framerate in ms: %f", 1.f / frameDeltaTime);
 		}
-	}
-
-	void Application::Tick(float deltaTime)
-	{
-	}
-
-	void Application::Render()
-	{
-		sf::RectangleShape rect {sf::Vector2f{100.f, 100.f}};
-		rect.setOrigin(50.f, 50.f);
-		rect.setFillColor(sf::Color::Cyan);
-		rect.setPosition(m_Window.getSize().x / 2.f, m_Window.getSize().y / 2.f);
-
-		m_Window.draw(rect);
 	}
 
 	void Application::TickInternal(float deltaTime)
 	{
 		Tick(deltaTime);
+
+		if (m_CurrentWorld)
+		{
+			m_CurrentWorld->TickInternal(deltaTime);
+		}
 	}
 
 	void Application::RenderInternal()
@@ -59,5 +50,19 @@ namespace ly
 		m_Window.clear();
 		Render();
 		m_Window.display();
+	}
+
+	void Application::Render()
+	{
+		sf::RectangleShape rect{sf::Vector2f{100.f, 100.f}};
+		rect.setOrigin(50.f, 50.f);
+		rect.setFillColor(sf::Color::Green);
+		rect.setPosition(m_Window.getSize().x / 2.f, m_Window.getSize().y / 2.f);
+
+		m_Window.draw(rect);
+	}
+
+	void Application::Tick(float deltaTime)
+	{
 	}
 }
