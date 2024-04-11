@@ -11,9 +11,7 @@ namespace ly
 	void World::BeginPlayInternal()
 	{
 		if (!m_HasBegunPlay)
-		{
 			m_HasBegunPlay = true;
-		}
 	}
 
 	void World::TickInternal(float deltaTime)
@@ -26,8 +24,16 @@ namespace ly
 		}
 		m_PendingActors.clear();
 
-		for (auto& actor : m_Actors)
-			actor->Tick(deltaTime);
+		for (auto it = m_Actors.begin(); it != m_Actors.end();)
+		{
+			if (it->get()->IsPendingDestroy())
+				it = m_Actors.erase(it);
+			else
+			{
+				it->get()->Tick(deltaTime);
+				++it;
+			}
+		}
 	}
 
 	void World::BeginPlay()

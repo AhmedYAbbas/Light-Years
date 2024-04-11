@@ -1,27 +1,28 @@
 #pragma once
 
 #include "Core/Core.h"
+#include "Framework/Object.h"
 
 namespace ly
 {
 	class World;
 
-	class Actor
+	class Actor : public Object
 	{
 	public:
 		Actor(World* world);
-		virtual ~Actor() = default;
+		virtual ~Actor();
 
 		virtual void BeginPlay();
 		virtual void Tick(float deltaTime);
-		inline Ref<World> GetWorld() const { return m_World; }
+		inline World* GetWorld() const { return m_World; }
 
 	private:
 		void BeginPlayInternal();
 		void TickInternal(float deltaTime);
 
 	private:
-		Ref<World> m_World;
+		World* m_World;
 		bool m_HasBegunPlay;
 	};
 }

@@ -7,12 +7,15 @@ namespace ly
 	{
 	}
 
+	Actor::~Actor()
+	{
+		LOG("Actor Destroyed!");
+	}
+
 	void Actor::BeginPlayInternal()
 	{
 		if (!m_HasBegunPlay)
-		{
 			m_HasBegunPlay = true;
-		}
 	}
 
 	void Actor::TickInternal(float deltaTime)

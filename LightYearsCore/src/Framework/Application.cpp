@@ -37,6 +37,7 @@ namespace ly
 
 	void Application::TickInternal(float deltaTime)
 	{
+		Tick(deltaTime);
 		if (m_CurrentWorld)
 		{
 			m_CurrentWorld->Tick(deltaTime);
@@ -62,6 +63,5 @@ namespace ly
 
 	void Application::Tick(float deltaTime)
 	{
-		TickInternal(deltaTime);
 	}
 }
