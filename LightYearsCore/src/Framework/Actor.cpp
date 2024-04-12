@@ -4,9 +4,10 @@
 
 namespace ly
 {
-	Actor::Actor(World* world)
+	Actor::Actor(World* world, const std::string& filepath)
 		: m_World{world}, m_HasBegunPlay{false}
 	{
+		SetTexture(filepath);
 	}
 
 	Actor::~Actor()
@@ -85,7 +86,9 @@ namespace ly
 		AssetManager& assetManager = AssetManager::Get();
 		m_Texture = assetManager.LoadTexture(filepath);
 		if (m_Texture)
+		{
 			m_Sprite.setTexture(*m_Texture, true);
-		CenterPivot();
+			CenterPivot();
+		}
 	}
 }

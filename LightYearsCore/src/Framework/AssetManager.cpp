@@ -5,6 +5,7 @@ namespace ly
 	Scope<AssetManager> AssetManager::s_Instance = nullptr;
 
 	AssetManager::AssetManager()
+		: m_RootDirectory{}
 	{
 	}
 
@@ -22,13 +23,18 @@ namespace ly
 			return m_LoadedTextureMap[filepath];
 
 		Ref<sf::Texture> texture = CreateRef<sf::Texture>();
-		if (texture->loadFromFile(filepath))
+		if (texture->loadFromFile(m_RootDirectory + filepath))
 		{
 			m_LoadedTextureMap[filepath] = texture;
 			return texture;
 		}
 
 		return nullptr;
+	}
+
+	void AssetManager::SetAssetRootDirectory(const std::string& directory)
+	{
+		m_RootDirectory = directory;
 	}
 
 	void AssetManager::CleanCycle()

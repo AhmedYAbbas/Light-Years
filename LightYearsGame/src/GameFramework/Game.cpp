@@ -1,7 +1,9 @@
 #include <Core/EntryPoint.h>
 
-#include "GameFramework/Game.h"
 #include "config.h"
+#include "GameFramework/Game.h"
+#include "Player/PlayerSpaceship.h"
+#include "Framework/AssetManager.h"
 
 ly::Application* ly::CreateApplication()
 {
@@ -11,12 +13,11 @@ ly::Application* ly::CreateApplication()
 Game::Game()
 	: Application{600, 980, "Light Years", sf::Style::Close | sf::Style::Titlebar}
 {
+	ly::AssetManager::Get().SetAssetRootDirectory(GetResourceDir());
 	WeakRef<ly::World> world = LoadWorld<ly::World>();
-	world.lock()->SpawnActor<ly::Actor>();
-	actorToDestroy = world.lock()->SpawnActor<ly::Actor>();
-	actorToDestroy.lock()->SetTexture(GetResourceDir() + "SpaceShooterRedux/PNG/playerShip1_blue.png");
-	actorToDestroy.lock()->SetActorLocation(sf::Vector2f(300.f, 490.f));
-	actorToDestroy.lock()->SetActorRotation(90.f);
+	playerSpaceship = world.lock()->SpawnActor<PlayerSpaceship>();
+	playerSpaceship.lock()->SetActorLocation(sf::Vector2f(300.f, 490.f));
+	playerSpaceship.lock()->SetActorRotation(90.f);
 }
 
 void Game::Render()
@@ -27,11 +28,4 @@ void Game::Render()
 void Game::Tick(float deltaTime)
 {
 	Application::Tick(deltaTime);
-
-	counter += deltaTime;
-	if (counter >= 2.f)
-	{
-		//if (!actorToDestroy.expired())
-			//actorToDestroy.lock()->Destroy();
-	}
 }

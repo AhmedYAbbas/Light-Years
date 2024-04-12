@@ -12,7 +12,7 @@ namespace ly
 	class Actor : public Object
 	{
 	public:
-		Actor(World* world);
+		Actor(World* world, const std::string& filepath = "");
 		virtual ~Actor();
 
 		void BeginPlayInternal();

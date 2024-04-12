@@ -2,6 +2,8 @@
 
 #include <LightYears.h>
 
+class PlayerSpaceship;
+
 class Game : public ly::Application
 {
 public:
@@ -12,5 +14,5 @@ public:
 
 private:
 	float counter = 0.f;
-	WeakRef<ly::Actor> actorToDestroy;
+	WeakRef<PlayerSpaceship> playerSpaceship;
 };
