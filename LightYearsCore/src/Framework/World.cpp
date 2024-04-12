@@ -19,7 +19,6 @@ namespace ly
 
 	void World::TickInternal(float deltaTime)
 	{
-		LOG("Tick at framerate %f", 1.f / deltaTime);
 		for (auto& actor : m_PendingActors)
 		{
 			m_Actors.push_back(actor);
@@ -48,7 +47,6 @@ namespace ly
 
 	void World::BeginPlay()
 	{
-		LOG("Begin Play!");
 	}
 
 	void World::Tick(float deltaTime)

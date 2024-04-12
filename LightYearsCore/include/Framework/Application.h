@@ -39,6 +39,8 @@ namespace ly
 		float m_TargetDeltaTime;
 		
 		Ref<World> m_CurrentWorld;
+		sf::Clock m_CleanCycleClock;
+		float m_CleanCycleInterval;
 	};
 
 	Application* CreateApplication();

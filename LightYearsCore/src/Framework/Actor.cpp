@@ -1,4 +1,5 @@
 #include "Framework/Actor.h"
+#include "Framework/AssetManager.h"
 
 namespace ly
 {
@@ -9,7 +10,6 @@ namespace ly
 
 	Actor::~Actor()
 	{
-		LOG("Actor Destroyed!");
 	}
 
 	void Actor::BeginPlayInternal()
@@ -37,19 +37,17 @@ namespace ly
 
 	void Actor::BeginPlay()
 	{
-		LOG("Actor Began Play!");
 	}
 
 	void Actor::Tick(float deltaTime)
 	{
-		LOG("Actor is ticking.");
 	}
 
 	void Actor::SetTexture(const std::string& filepath)
 	{
-		if (m_Texture.loadFromFile(filepath))
-		{
-			m_Sprite.setTexture(m_Texture, true);
-		}
+		AssetManager& assetManager = AssetManager::Get();
+		m_Texture = assetManager.LoadTexture(filepath);
+		if (m_Texture)
+			m_Sprite.setTexture(*m_Texture, true);
 	}
 }

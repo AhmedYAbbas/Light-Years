@@ -1,6 +1,7 @@
 #include <Core/EntryPoint.h>
 
 #include "GameFramework/Game.h"
+#include "config.h"
 
 ly::Application* ly::CreateApplication()
 {
@@ -13,7 +14,7 @@ Game::Game()
 	WeakRef<ly::World> world = LoadWorld<ly::World>();
 	world.lock()->SpawnActor<ly::Actor>();
 	actorToDestroy = world.lock()->SpawnActor<ly::Actor>();
-	actorToDestroy.lock()->SetTexture("assets/SpaceShooterRedux/PNG/playerShip1_blue.png");
+	actorToDestroy.lock()->SetTexture(GetResourceDir() + "SpaceShooterRedux/PNG/playerShip1_blue.png");
 }
 
 void Game::Render()

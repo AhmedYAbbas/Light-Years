@@ -5,3 +5,4 @@
 #include "Framework/Application.h"
 #include "Framework/Actor.h"
 #include "Framework/Object.h"
+#include "Framework/AssetManager.h"

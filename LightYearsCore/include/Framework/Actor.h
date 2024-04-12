@@ -32,6 +32,6 @@ namespace ly
 		bool m_HasBegunPlay;
 
 		sf::Sprite m_Sprite;
-		sf::Texture m_Texture;
+		Ref<sf::Texture> m_Texture;
 	};
 }

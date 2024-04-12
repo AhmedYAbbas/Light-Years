@@ -1,11 +1,12 @@
 #include "Core/Core.h"
 #include "Framework/Application.h"
 #include "Framework/World.h"
+#include "Framework/AssetManager.h"
 
 namespace ly
 {
 	Application::Application(unsigned int windowWidth, unsigned int windowHeight, const std::string& title, uint32_t style)
-		: m_Window{sf::VideoMode(windowWidth, windowHeight), title, style}, m_TickClock {}, m_TargetFrameRate{60.f}, m_TargetDeltaTime{1.f / m_TargetFrameRate}, m_CurrentWorld{nullptr}
+		: m_Window{sf::VideoMode(windowWidth, windowHeight), title, style}, m_TickClock {}, m_TargetFrameRate{60.f}, m_TargetDeltaTime{1.f / m_TargetFrameRate}, m_CurrentWorld{nullptr}, m_CleanCycleClock{}, m_CleanCycleInterval{2.f}
 	{
 	}
 
@@ -41,6 +42,12 @@ namespace ly
 		if (m_CurrentWorld)
 		{
 			m_CurrentWorld->TickInternal(deltaTime);
+		}
+
+		if (m_CleanCycleClock.getElapsedTime().asSeconds() >= m_CleanCycleInterval)
+		{
+			m_CleanCycleClock.restart();
+			AssetManager::Get().CleanCycle();
 		}
 	}
 
