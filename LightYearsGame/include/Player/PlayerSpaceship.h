@@ -14,6 +14,8 @@ public:
 private:
 	void HandleInput();
 	void ConsumeInput(float deltaTime);
+	void NormalizeInput();
+	void ClampInputToScreenEdge();
 
 private:
 	sf::Vector2f m_MoveInput;

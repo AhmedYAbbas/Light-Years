@@ -5,9 +5,13 @@
 
 namespace ly
 {
+	Application* Application::s_Instance = nullptr;
+
 	Application::Application(unsigned int windowWidth, unsigned int windowHeight, const std::string& title, uint32_t style)
 		: m_Window{sf::VideoMode(windowWidth, windowHeight), title, style}, m_TickClock {}, m_TargetFrameRate{60.f}, m_TargetDeltaTime{1.f / m_TargetFrameRate}, m_CurrentWorld{nullptr}, m_CleanCycleClock{}, m_CleanCycleInterval{2.f}
 	{
+		if (!s_Instance)
+			s_Instance = this;
 	}
 
 	void Application::Run()

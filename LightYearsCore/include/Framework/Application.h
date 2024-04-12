@@ -10,9 +10,9 @@ namespace ly
 	class Application
 	{
 	public:
-		Application(unsigned int windowWidth, unsigned int windowHeight, const std::string& title, uint32_t style);
 		virtual ~Application() = default;
 		
+		static Application& Get() { return *s_Instance; }
 		void Run();
 
 		template<typename T>
@@ -24,7 +24,11 @@ namespace ly
 			return newWorld;
 		}
 
+		sf::Vector2u GetWindowSize() const { return m_Window.getSize(); }
+
 	protected:
+		Application(unsigned int windowWidth, unsigned int windowHeight, const std::string& title, uint32_t style);
+
 		virtual void Tick(float deltaTime);
 		virtual void Render();
 
@@ -41,6 +45,9 @@ namespace ly
 		Ref<World> m_CurrentWorld;
 		sf::Clock m_CleanCycleClock;
 		float m_CleanCycleInterval;
+
+	private:
+		static Application* s_Instance;
 	};
 
 	Application* CreateApplication();

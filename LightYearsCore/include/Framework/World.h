@@ -7,6 +7,7 @@
 namespace ly
 {
 	class Actor;
+	class Application;
 
 	class World
 	{
@@ -25,6 +26,8 @@ namespace ly
 			m_PendingActors.push_back(actor);
 			return actor;
 		}
+
+		sf::Vector2u GetWindowSize() const;
 
 	private:
 		void BeginPlay();

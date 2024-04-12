@@ -4,10 +4,10 @@
 
 #include "Core/Core.h"
 #include "Framework/Object.h"
+#include "Framework/World.h"
 
 namespace ly
 {
-	class World;
 
 	class Actor : public Object
 	{
@@ -31,6 +31,7 @@ namespace ly
 		inline sf::Vector2f GetForwardDirection();
 		inline sf::Vector2f GetRightDirection();
 
+		sf::Vector2u GetWindowSize() const { return m_World->GetWindowSize(); }
 		inline World* GetWorld() const { return m_World; }
 
 	protected:

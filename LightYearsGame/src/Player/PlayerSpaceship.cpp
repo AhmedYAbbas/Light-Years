@@ -1,4 +1,5 @@
 #include <SFML/System.hpp>
+#include <Utility/Math.h>
 #include "Player/PlayerSpaceship.h"
 
 PlayerSpaceship::PlayerSpaceship(ly::World* world, const std::string& filepath)
@@ -25,10 +26,27 @@ void PlayerSpaceship::HandleInput()
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 		m_MoveInput.x = 1.f;
 
+	ClampInputToScreenEdge();
+	NormalizeInput();
 }
 
 void PlayerSpaceship::ConsumeInput(float deltaTime)
 {
 	SetVelocity(m_MoveInput * m_Speed);
 	m_MoveInput.x = m_MoveInput.y = 0.f;
+}
+
+void PlayerSpaceship::NormalizeInput()
+{
+	ly::Math::Normalize(m_MoveInput);
+}
+
+void PlayerSpaceship::ClampInputToScreenEdge()
+{
+	const sf::Vector2f location = GetActorLocation();
+
+	if ((location.x < 0.f && m_MoveInput.x == -1.f) || (location.x > GetWindowSize().x && m_MoveInput.x == 1.f))
+		m_MoveInput.x = 0;
+	if ((location.y < 0.f && m_MoveInput.y == -1.f) || (location.y > GetWindowSize().y && m_MoveInput.y == 1.f))
+		m_MoveInput.y = 0;
 }

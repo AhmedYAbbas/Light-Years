@@ -1,5 +1,7 @@
 #include "Framework/World.h"
 #include "Framework/Actor.h"
+#include "Framework/Application.h"
+
 
 namespace ly
 {
@@ -43,6 +45,11 @@ namespace ly
 	{
 		for (auto& actor : m_Actors)
 			actor->Render(window);
+	}
+
+	sf::Vector2u World::GetWindowSize() const
+	{
+		return Application::Get().GetWindowSize();
 	}
 
 	void World::BeginPlay()
