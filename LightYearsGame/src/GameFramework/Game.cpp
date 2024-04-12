@@ -15,6 +15,8 @@ Game::Game()
 	world.lock()->SpawnActor<ly::Actor>();
 	actorToDestroy = world.lock()->SpawnActor<ly::Actor>();
 	actorToDestroy.lock()->SetTexture(GetResourceDir() + "SpaceShooterRedux/PNG/playerShip1_blue.png");
+	actorToDestroy.lock()->SetActorLocation(sf::Vector2f(300.f, 490.f));
+	actorToDestroy.lock()->SetActorRotation(90.f);
 }
 
 void Game::Render()
@@ -29,7 +31,7 @@ void Game::Tick(float deltaTime)
 	counter += deltaTime;
 	if (counter >= 2.f)
 	{
-		if (!actorToDestroy.expired())
-			actorToDestroy.lock()->Destroy();
+		//if (!actorToDestroy.expired())
+			//actorToDestroy.lock()->Destroy();
 	}
 }
