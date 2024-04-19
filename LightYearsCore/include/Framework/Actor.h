@@ -32,8 +32,12 @@ namespace ly
 		inline sf::Vector2f GetForwardDirection() { return Math::RotationToVector(GetActorRotation()); }
 		inline sf::Vector2f GetRightDirection() { return Math::RotationToVector(GetActorRotation() + 90.f); }
 
+		inline sf::FloatRect GetActorGlobalBounds() const { return m_Sprite.getGlobalBounds(); }
+
 		sf::Vector2u GetWindowSize() const { return m_World->GetWindowSize(); }
 		inline World* GetWorld() const { return m_World; }
+
+		bool IsActorOutOfWindowBounds() const;
 
 	protected:
 		virtual void BeginPlay();

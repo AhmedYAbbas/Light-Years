@@ -52,6 +52,24 @@ namespace ly
 		SetActorRotation(GetActorRotation() + offset);
 	}
 
+	bool Actor::IsActorOutOfWindowBounds() const
+	{
+		const float windowWidth = GetWindowSize().x;
+		const float windowHeight = GetWindowSize().y;
+
+		const float width = GetActorGlobalBounds().width;
+		const float height = GetActorGlobalBounds().height;
+
+		const sf::Vector2f& pos = GetActorLocation();
+
+		if (pos.x < -width)					return true;
+		if (pos.x > windowWidth + width)	return true;
+		if (pos.y < -height)				return true;
+		if (pos.y > windowHeight + height)	return true;
+
+		return false;
+	}
+
 	void Actor::BeginPlay()
 	{
 	}

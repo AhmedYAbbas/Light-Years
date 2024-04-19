@@ -30,13 +30,8 @@ namespace ly
 
 		for (auto it = m_Actors.begin(); it != m_Actors.end();)
 		{
-			if (it->get()->IsPendingDestroy())
-				it = m_Actors.erase(it);
-			else
-			{
-				it->get()->TickInternal(deltaTime);
-				++it;
-			}
+			it->get()->TickInternal(deltaTime);
+			++it;
 		}
 		Tick(deltaTime);
 	}
@@ -50,6 +45,17 @@ namespace ly
 	sf::Vector2u World::GetWindowSize() const
 	{
 		return Application::Get().GetWindowSize();
+	}
+
+	void World::CleanCycle()
+	{
+		for (auto it = m_Actors.begin(); it != m_Actors.end();)
+		{
+			if (it->get()->IsPendingDestroy())
+				it = m_Actors.erase(it);
+			else
+				++it;
+		}
 	}
 
 	void World::BeginPlay()
