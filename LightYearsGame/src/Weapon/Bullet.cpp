@@ -7,6 +7,13 @@ namespace ly
 	{
 	}
 
+	void Bullet::BeginPlay()
+	{
+		Actor::BeginPlay();
+
+		SetEnablePhysics(true);
+	}
+
 	void Bullet::Tick(float deltaTime)
 	{
 		Actor::Tick(deltaTime);

@@ -9,11 +9,14 @@ namespace ly
 	public:
 		Spaceship(World* world, const std::string& filepath = "");
 
-		virtual void Tick(float deltaTime) override;
 		void SetVelocity(const sf::Vector2f& velocity);
-
 		inline const sf::Vector2f& GetVelocity() const { return m_Velocity; }
+
 		virtual void Shoot();
+
+	protected:
+		virtual void BeginPlay() override;
+		virtual void Tick(float deltaTime) override;
 
 	private:
 		sf::Vector2f m_Velocity;

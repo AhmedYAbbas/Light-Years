@@ -2,6 +2,7 @@
 #include "Framework/Application.h"
 #include "Framework/World.h"
 #include "Framework/AssetManager.h"
+#include "Framework/PhysicsSystem.h"
 
 namespace ly
 {
@@ -47,6 +48,9 @@ namespace ly
 		{
 			m_CurrentWorld->TickInternal(deltaTime);
 		}
+
+		// TODO: Implemet a fixed delta time to proporly calculate physics
+		PhysicsSystem::Get().Step(deltaTime);
 
 		if (m_CleanCycleClock.getElapsedTime().asSeconds() >= m_CleanCycleInterval)
 		{

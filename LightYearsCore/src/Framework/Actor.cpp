@@ -1,10 +1,13 @@
+#include <box2d/b2_body.h>
+
 #include "Framework/Actor.h"
 #include "Framework/AssetManager.h"
+#include "Framework/PhysicsSystem.h"
 
 namespace ly
 {
 	Actor::Actor(World* world, const std::string& filepath)
-		: m_World{world}, m_HasBegunPlay{false}
+		: m_World{world}, m_HasBegunPlay{false}, m_PhysicsBody{nullptr}, m_PhysicsEnabled{false}
 	{
 		SetTexture(filepath);
 	}
@@ -70,6 +73,15 @@ namespace ly
 		return false;
 	}
 
+	void Actor::SetEnablePhysics(bool enable)
+	{
+		m_PhysicsEnabled = enable;
+		if (m_PhysicsEnabled)
+			InitializePhysics();
+		else
+			UninitializePhysics();
+	}
+
 	void Actor::BeginPlay()
 	{
 	}
@@ -82,6 +94,30 @@ namespace ly
 	{
 		sf::FloatRect bounds = m_Sprite.getGlobalBounds();
 		m_Sprite.setOrigin(bounds.width / 2.f, bounds.height / 2.f);
+	}
+
+	void Actor::InitializePhysics()
+	{
+		if (!m_PhysicsBody)
+			m_PhysicsBody = PhysicsSystem::Get().AddListener(this);
+	}
+
+	void Actor::UninitializePhysics()
+	{
+		if (m_PhysicsBody)
+			PhysicsSystem::Get().RemoveListener(m_PhysicsBody);
+	}
+
+	void Actor::UpdatePhysicsBodyTransform()
+	{
+		if (m_PhysicsBody)
+		{
+			const float physicsScale = PhysicsSystem::Get().GetPhysicsScale();
+			const b2Vec2 pos {GetActorLocation().x * physicsScale, GetActorLocation().y * physicsScale};
+			const float rotation = Math::DegToRad(GetActorRotation());
+
+			m_PhysicsBody->SetTransform(pos, rotation);
+		}
 	}
 
 	void Actor::SetTexture(const std::string& filepath)
