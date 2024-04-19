@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <unordered_map>
+#include <unordered_set>
 
 #define LOG(X, ...) printf(X "\n", __VA_ARGS__)
 
@@ -35,3 +36,6 @@ using Map = std::map<Key, Value>;
 
 template<typename Key, typename Value>
 using Dict = std::unordered_map<Key, Value>;
+
+template<typename Key>
+using Set = std::unordered_set<Key>;

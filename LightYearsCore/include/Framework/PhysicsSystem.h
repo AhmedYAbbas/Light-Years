@@ -24,9 +24,14 @@ namespace ly
 		void RemoveListener(b2Body* body);
 
 		inline float GetPhysicsScale() const { return m_PhysicsScale; }
+		
+		static void Cleanup();
 
 	protected:
 		PhysicsSystem();
+
+	private:
+		void ProcessPendingRemoveListeners();
 
 	private:
 		b2World m_PhysicsWorld;
@@ -35,6 +40,8 @@ namespace ly
 		int m_PositionIterations;
 		
 		PhysicsContactListener m_ContactListener;
+
+		Set<b2Body*> m_PendingRemoveListeners;
 
 	private:
 		static Scope<PhysicsSystem> s_Instance;

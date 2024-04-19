@@ -20,6 +20,7 @@ namespace ly
 
 	void PhysicsSystem::Step(float timeStep)
 	{
+		ProcessPendingRemoveListeners();
 		m_PhysicsWorld.Step(timeStep, m_VelocityIterations, m_PositionIterations);
 	}
 
@@ -52,13 +53,28 @@ namespace ly
 
 	void PhysicsSystem::RemoveListener(b2Body* body)
 	{
+		m_PendingRemoveListeners.insert(body);
+	}
+
+	void PhysicsSystem::Cleanup()
+	{
+		s_Instance = Scope<PhysicsSystem> {new PhysicsSystem};
 	}
 
 	PhysicsSystem::PhysicsSystem()
-		: m_PhysicsWorld {b2Vec2_zero}, m_PhysicsScale {0.01f}, m_VelocityIterations {8}, m_PositionIterations {3}, m_ContactListener {}
+		: m_PhysicsWorld{b2Vec2_zero}, m_PhysicsScale{0.01f}, m_VelocityIterations{8}, m_PositionIterations{3}, m_ContactListener{}, m_PendingRemoveListeners{}
 	{
 		m_PhysicsWorld.SetContactListener(&m_ContactListener);
 		m_PhysicsWorld.SetAllowSleeping(false);
+	}
+
+	void PhysicsSystem::ProcessPendingRemoveListeners()
+	{
+		for (auto listener : m_PendingRemoveListeners)
+		{
+			m_PhysicsWorld.DestroyBody(listener);
+		}
+		m_PendingRemoveListeners.clear();
 	}
 
 	void PhysicsContactListener::BeginContact(b2Contact* contact)

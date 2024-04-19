@@ -20,7 +20,7 @@ namespace ly
 		playerSpaceship = world.lock()->SpawnActor<PlayerSpaceship>();
 		playerSpaceship.lock()->SetActorLocation(sf::Vector2f(300.f, 490.f));
 
-		WeakRef<Spaceship> test = world.lock()->SpawnActor<Spaceship>();
+		test = world.lock()->SpawnActor<Spaceship>();
 		test.lock()->SetTexture("SpaceShooterRedux/PNG/playerShip1_blue.png");
 		test.lock()->SetActorLocation(sf::Vector2f(100.f, 50.f));
 	}
@@ -33,5 +33,12 @@ namespace ly
 	void Game::Tick(float deltaTime)
 	{
 		Application::Tick(deltaTime);
+
+		counter += deltaTime;
+		if (counter > 10.f)
+		{
+			if (!test.expired())
+				test.lock()->Destroy();
+		}
 	}
 }

@@ -8,7 +8,7 @@ namespace ly
 		Object();
 		virtual ~Object();
 
-		void Destroy();
+		virtual void Destroy();
 		inline bool IsPendingDestroy() const { return m_IsPendingDestroy; }
 
 	private:

@@ -5,6 +5,7 @@
 namespace ly
 {
 	class PlayerSpaceship;
+	class Spaceship;
 
 	class Game : public Application
 	{
@@ -17,5 +18,6 @@ namespace ly
 	private:
 		float counter = 0.f;
 		WeakRef<PlayerSpaceship> playerSpaceship;
+		WeakRef<Spaceship> test;
 	};
 }

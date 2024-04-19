@@ -44,6 +44,7 @@ namespace ly
 
 		virtual void OnActorBeginOverlap(Actor* other);
 		virtual void OnActorEndOverlap(Actor* other);
+		virtual void Destroy() override;
 
 	protected:
 		virtual void BeginPlay();
