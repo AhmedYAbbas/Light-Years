@@ -2,17 +2,20 @@
 
 #include <LightYears.h>
 
-class PlayerSpaceship;
-
-class Game : public ly::Application
+namespace ly
 {
-public:
-	Game();
+	class PlayerSpaceship;
 
-	virtual void Render() override;
-	virtual void Tick(float deltaTime) override;
+	class Game : public Application
+	{
+	public:
+		Game();
 
-private:
-	float counter = 0.f;
-	WeakRef<PlayerSpaceship> playerSpaceship;
-};
+		virtual void Render() override;
+		virtual void Tick(float deltaTime) override;
+
+	private:
+		float counter = 0.f;
+		WeakRef<PlayerSpaceship> playerSpaceship;
+	};
+}

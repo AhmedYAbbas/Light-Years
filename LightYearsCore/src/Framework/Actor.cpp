@@ -1,6 +1,5 @@
 #include "Framework/Actor.h"
 #include "Framework/AssetManager.h"
-#include "Utility/Math.h"
 
 namespace ly
 {
@@ -8,10 +7,6 @@ namespace ly
 		: m_World{world}, m_HasBegunPlay{false}
 	{
 		SetTexture(filepath);
-	}
-
-	Actor::~Actor()
-	{
 	}
 
 	void Actor::BeginPlayInternal()
@@ -55,16 +50,6 @@ namespace ly
 	void Actor::AddActorRotationOffset(float offset)
 	{
 		SetActorRotation(GetActorRotation() + offset);
-	}
-
-	inline sf::Vector2f Actor::GetForwardDirection()
-	{
-		return Math::RotationToVector(GetActorRotation());
-	}
-
-	inline sf::Vector2f Actor::GetRightDirection()
-	{
-		return Math::RotationToVector(GetActorRotation() + 90.f);
 	}
 
 	void Actor::BeginPlay()

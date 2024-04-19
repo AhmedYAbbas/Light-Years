@@ -19,10 +19,10 @@ namespace ly
 		void TickInternal(float deltaTime);
 		void Render(sf::RenderWindow& window);
 
-		template<typename T>
-		WeakRef<T> SpawnActor()
+		template<typename T, typename ...Args>
+		WeakRef<T> SpawnActor(Args&& ...args)
 		{
-			Ref<T> actor = CreateRef<T>(this);
+			Ref<T> actor = CreateRef<T>(this, std::forward<Args>(args)...);
 			m_PendingActors.push_back(actor);
 			return actor;
 		}

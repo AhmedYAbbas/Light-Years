@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Core/Core.h"
+#include "Utility/Math.h"
 #include "Framework/Object.h"
 #include "Framework/World.h"
 
@@ -13,7 +14,7 @@ namespace ly
 	{
 	public:
 		Actor(World* world, const std::string& filepath = "");
-		virtual ~Actor();
+		virtual ~Actor() = default;
 
 		void BeginPlayInternal();
 		void TickInternal(float deltaTime);
@@ -28,8 +29,8 @@ namespace ly
 
 		inline const sf::Vector2f& GetActorLocation() const { return m_Sprite.getPosition(); }
 		inline float GetActorRotation() const { return m_Sprite.getRotation(); }
-		inline sf::Vector2f GetForwardDirection();
-		inline sf::Vector2f GetRightDirection();
+		inline sf::Vector2f GetForwardDirection() { return Math::RotationToVector(GetActorRotation()); }
+		inline sf::Vector2f GetRightDirection() { return Math::RotationToVector(GetActorRotation() + 90.f); }
 
 		sf::Vector2u GetWindowSize() const { return m_World->GetWindowSize(); }
 		inline World* GetWorld() const { return m_World; }
