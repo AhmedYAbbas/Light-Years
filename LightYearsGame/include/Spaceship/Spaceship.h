@@ -20,6 +20,9 @@ namespace ly
 		virtual void Tick(float deltaTime) override;
 
 	private:
+		void OnHealthChanged(float amount, float health, float maxHealth);
+
+	private:
 		sf::Vector2f m_Velocity;
 		HealthComponent m_HealthComponent;
 	};

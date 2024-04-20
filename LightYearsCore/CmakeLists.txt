@@ -17,6 +17,9 @@ add_library(${LIGHT_YEARS_CORE_TARGET_NAME} STATIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/PhysicsSystem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/PhysicsSystem.cpp
 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/Delegate.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/Delegate.cpp
+
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Utility/Math.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Utility/Math.cpp
 
