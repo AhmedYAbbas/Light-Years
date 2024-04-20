@@ -57,6 +57,16 @@ namespace ly
 		return distribution(gen);
 	}
 
+	int Math::RandomRange(int min, int max)
+	{
+		std::random_device rd;
+		std::mt19937 gen(rd());
+
+		std::uniform_int_distribution<int> distribution(min, max);
+
+		return distribution(gen);
+	}
+
 	sf::Vector2f Math::RandomUnitVector()
 	{
 		float x = RandomRange(-1.f, 1.f);

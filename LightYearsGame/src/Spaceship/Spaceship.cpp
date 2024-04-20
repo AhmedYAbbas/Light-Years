@@ -1,5 +1,7 @@
 #include <Utility/Math.h>
+
 #include "Spaceship/Spaceship.h"
+#include "VFX/Explosion.h"
 
 namespace ly
 {
@@ -36,6 +38,8 @@ namespace ly
 
 	void Spaceship::Blow()
 	{
+		Scope<Explosion> explosion = CreateScope<Explosion>();
+		explosion->SpawnExplosion(GetWorld(), GetActorLocation());
 		Destroy();
 	}
 
