@@ -25,8 +25,15 @@ namespace ly
 		virtual void OnTakenDamage(float amount, float health, float maxHealth);
 		virtual void Blow();
 
+		void Blink();
+		void UpdateBlink(float deltaTime);
+
 	private:
 		sf::Vector2f m_Velocity;
 		HealthComponent m_HealthComponent;
+
+		float m_BlinkTime;
+		float m_BlinkDuration;
+		sf::Color m_BlinkColorOffset;
 	};
 }

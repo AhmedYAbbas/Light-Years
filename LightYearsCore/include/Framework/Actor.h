@@ -35,9 +35,10 @@ namespace ly
 		inline sf::Vector2f GetRightDirection() { return Math::RotationToVector(GetActorRotation() + 90.f); }
 
 		inline sf::FloatRect GetActorGlobalBounds() const { return m_Sprite.getGlobalBounds(); }
-
 		sf::Vector2u GetWindowSize() const { return m_World->GetWindowSize(); }
-		inline World* GetWorld() const { return m_World; }
+
+		inline const World* GetWorld() const { return m_World; }
+		inline World* GetWorld() { return m_World; }
 
 		bool IsActorOutOfWindowBounds() const;
 		void SetEnablePhysics(bool enable);
@@ -53,6 +54,9 @@ namespace ly
 
 		bool IsOtherHostile(Actor* other);
 		virtual void TakeDamage(float amout);
+
+		sf::Sprite& GetSprite() { return m_Sprite; }
+		const sf::Sprite& GetSprite() const { return m_Sprite; }
 
 	protected:
 		virtual void BeginPlay();
