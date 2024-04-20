@@ -44,11 +44,20 @@ namespace ly
 
 		virtual void OnActorBeginOverlap(Actor* other);
 		virtual void OnActorEndOverlap(Actor* other);
+
 		virtual void Destroy() override;
+
+		inline void SetTeamID(int teamID) { m_TeamID = teamID; }
+		inline static int GetNeutralTeamID() { return s_NeutralTeamID; }
+		inline int GetTeamID() const { return m_TeamID; }
+
+		bool IsOtherHostile(Actor* other);
+		virtual void TakeDamage(float amout);
 
 	protected:
 		virtual void BeginPlay();
 		virtual void Tick(float deltaTime);
+
 
 	private:
 		void CenterPivot();
@@ -65,5 +74,8 @@ namespace ly
 
 		b2Body* m_PhysicsBody;
 		bool m_PhysicsEnabled;
+
+		int m_TeamID;
+		static const int s_NeutralTeamID = 255;
 	};
 }

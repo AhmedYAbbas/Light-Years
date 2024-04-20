@@ -11,8 +11,10 @@ namespace ly
 	{
 		Actor::BeginPlay();
 		SetEnablePhysics(true);
-		//m_HealthComponent.onHealthChanged.Bind(GetWeakRef(), &Spaceship::OnHealthChanged);
-		//m_HealthComponent.onHealthChanged.Broadcast(11, 98, 100);
+
+		m_HealthComponent.onHealthChanged.Bind(GetWeakRef(), &Spaceship::OnHealthChanged);
+		m_HealthComponent.onTakenDamage.Bind(GetWeakRef(), &Spaceship::OnTakenDamage);
+		m_HealthComponent.onHealthEmpty.Bind(GetWeakRef(), &Spaceship::Blow);
 	}
 
 	void Spaceship::Tick(float deltaTime)
@@ -23,7 +25,15 @@ namespace ly
 
 	void Spaceship::OnHealthChanged(float amount, float health, float maxHealth)
 	{
-		LOG("Health Changed by: % f, now health is : % f / % f", amount, health, maxHealth);
+	}
+
+	void Spaceship::OnTakenDamage(float amount, float health, float maxHealth)
+	{
+	}
+
+	void Spaceship::Blow()
+	{
+		Destroy();
 	}
 
 	void Spaceship::SetVelocity(const sf::Vector2f& velocity)
@@ -33,5 +43,10 @@ namespace ly
 
 	void Spaceship::Shoot()
 	{
+	}
+
+	void Spaceship::TakeDamage(float amount)
+	{
+		m_HealthComponent.ChangeHealth(-amount);
 	}
 }

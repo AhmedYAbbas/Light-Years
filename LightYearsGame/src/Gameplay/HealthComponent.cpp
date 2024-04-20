@@ -27,27 +27,19 @@ namespace ly
 			TakeDamage(-amount);
 
 			if (m_Health <= 0)
-				OnEmptyHealth();
+				HealthEmpty();
 		}
-		else
-		{
 
-		}
+		onHealthChanged.Broadcast(amount, m_Health, m_MaxHealth);
 	}
 
 	void HealthComponent::TakeDamage(float amount)
 	{
-		LOG("Took Damage: %f, now health is: %f/%f", amount, m_Health, m_MaxHealth);
+		onTakenDamage.Broadcast(amount, m_Health, m_MaxHealth);
 	}
 
-	void HealthComponent::OnEmptyHealth()
+	void HealthComponent::HealthEmpty()
 	{
-		LOG("DEAD!");
-	}
-
-	void HealthComponent::RegenerateHealth(float amount)
-	{
-		LOG("Health Regenerated: % f, now health is : % f / % f", amount, m_Health, m_MaxHealth);
-
+		onHealthEmpty.Broadcast();
 	}
 }

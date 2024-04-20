@@ -15,11 +15,12 @@ namespace ly
 
 	private:
 		void TakeDamage(float amount);
-		void OnEmptyHealth();
-		void RegenerateHealth(float amount);
+		void HealthEmpty();
 
 	public:
-		//Delegate<float, float, float> onHealthChanged;
+		Delegate<float, float, float> onHealthChanged;
+		Delegate<float, float, float> onTakenDamage;
+		Delegate<> onHealthEmpty;
 
 	private:
 		float m_Health;

@@ -8,6 +8,7 @@ namespace ly
 	PlayerSpaceship::PlayerSpaceship(World* world, const std::string& filepath)
 		: Spaceship {world, filepath}, m_MoveInput {0, 0}, m_Speed {200.f}, m_Shooter {CreateScope<BulletShooter>(this, 0.1f)}
 	{
+		SetTeamID(1);
 	}
 
 	void PlayerSpaceship::Tick(float deltaTime)

@@ -86,12 +86,10 @@ namespace ly
 
 	void Actor::OnActorBeginOverlap(Actor* other)
 	{
-		LOG("Overlapped!");
 	}
 
 	void Actor::OnActorEndOverlap(Actor* other)
 	{
-		LOG("Overlap Finished!");
 	}
 
 	void Actor::Destroy()
@@ -99,6 +97,18 @@ namespace ly
 		UninitializePhysics();
 		Object::Destroy();
 
+	}
+
+	bool Actor::IsOtherHostile(Actor* other)
+	{
+		if (m_TeamID == s_NeutralTeamID || other->m_TeamID == s_NeutralTeamID)
+			return false;
+
+		return m_TeamID != other->m_TeamID;
+	}
+
+	void Actor::TakeDamage(float amout)
+	{
 	}
 
 	void Actor::BeginPlay()
