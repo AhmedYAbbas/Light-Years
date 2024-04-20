@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Framework/Actor.h>
+#include "Gameplay/HealthComponent.h"
 
 namespace ly
 {
@@ -20,5 +21,6 @@ namespace ly
 
 	private:
 		sf::Vector2f m_Velocity;
+		HealthComponent m_HealthComponent;
 	};
 }

@@ -3,7 +3,7 @@
 namespace ly
 {
 	Spaceship::Spaceship(World* world, const std::string& filepath)
-		: Actor {world, filepath}
+		: Actor {world, filepath}, m_Velocity{}, m_HealthComponent{100.f, 100.f}
 	{
 	}
 

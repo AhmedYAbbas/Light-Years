@@ -57,6 +57,7 @@ namespace ly
 			m_CleanCycleClock.restart();
 			AssetManager::Get().CleanCycle();
 
+			// TODO:: Separate the world clean cycle from the asset manager clean cycle
 			if (m_CurrentWorld)
 				m_CurrentWorld->CleanCycle();
 		}
