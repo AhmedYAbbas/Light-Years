@@ -1,5 +1,4 @@
 #include "Enemy/Vanguard.h"
-#include "Weapon/BulletShooter.h"
 
 namespace ly
 {

@@ -9,6 +9,7 @@ namespace ly
 {
 	class Actor;
 	class Application;
+	class GameStage;
 
 	class World : public Object
 	{
@@ -30,12 +31,20 @@ namespace ly
 
 		sf::Vector2u GetWindowSize() const;
 		void CleanCycle();
+		void AddStage(const Ref<GameStage>& stage);
 
 	private:
 		virtual void BeginPlay();
 		virtual void Tick(float deltaTime);
+		virtual void InitGameStages();
+		virtual void AllGameStagesFinished();
+
+		void NextGameStage();
 		
 	private:
+		Vector<Ref<GameStage>> m_GameStages;
+		int m_CurrentStageIndex;
+
 		Vector<Ref<Actor>> m_Actors;
 		Vector<Ref<Actor>> m_PendingActors;
 		bool m_HasBegunPlay;

@@ -15,17 +15,16 @@ namespace ly
 
 	void GameStage::TickStage(float deltaTime)
 	{
-		LOG("Stage Ticking!");
 	}
 
 	void GameStage::FinishStage()
 	{
-		m_StageFinished = ture;
+		m_StageFinished = true;
 		OnStageFinished.Broadcast();
 		StageFinished();
 	}
 
-	GameStage::StageFinished()
+	void GameStage::StageFinished()
 	{
 		LOG("Stage Finished!");
 	}

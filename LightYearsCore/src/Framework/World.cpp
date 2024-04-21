@@ -1,12 +1,13 @@
 #include "Framework/World.h"
 #include "Framework/Actor.h"
 #include "Framework/Application.h"
+#include "Gameplay/GameStage.h"
 
 
 namespace ly
 {
 	World::World()
-		: m_HasBegunPlay{false}
+		: m_HasBegunPlay{false}, m_CurrentStageIndex{-1}
 	{
 	}
 
@@ -16,6 +17,8 @@ namespace ly
 		{
 			m_HasBegunPlay = true;
 			BeginPlay();
+			InitGameStages();
+			NextGameStage();
 		}
 	}
 
@@ -33,6 +36,10 @@ namespace ly
 			it->get()->TickInternal(deltaTime);
 			++it;
 		}
+
+		if (m_CurrentStageIndex >= 0 && m_CurrentStageIndex < m_GameStages.size())
+			m_GameStages[m_CurrentStageIndex]->TickStage(deltaTime);
+
 		Tick(deltaTime);
 	}
 
@@ -56,6 +63,19 @@ namespace ly
 			else
 				++it;
 		}
+
+		for (auto it = m_GameStages.begin(); it != m_GameStages.end();)
+		{
+			if (it->get()->IsStageFinished())
+				it = m_GameStages.erase(it);
+			else
+				++it;
+		}
+	}
+
+	void World::AddStage(const Ref<GameStage>& stage)
+	{
+		m_GameStages.push_back(stage);
 	}
 
 	void World::BeginPlay()
@@ -64,5 +84,25 @@ namespace ly
 
 	void World::Tick(float deltaTime)
 	{
+	}
+
+	void World::InitGameStages()
+	{
+	}
+
+	void World::AllGameStagesFinished()
+	{
+	}
+
+	void World::NextGameStage()
+	{
+		++m_CurrentStageIndex;
+		if (m_CurrentStageIndex >= 0 && m_CurrentStageIndex < m_GameStages.size())
+		{
+			m_GameStages[m_CurrentStageIndex]->OnStageFinished.Bind(GetWeakRef(), &World::NextGameStage);
+			m_GameStages[m_CurrentStageIndex]->StartStage();
+		}
+		else
+			AllGameStagesFinished();
 	}
 }
