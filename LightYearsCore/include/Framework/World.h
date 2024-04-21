@@ -40,10 +40,11 @@ namespace ly
 		virtual void AllGameStagesFinished();
 
 		void NextGameStage();
+		void StartStages();
 		
 	private:
 		Vector<Ref<GameStage>> m_GameStages;
-		int m_CurrentStageIndex;
+		Vector<Ref<GameStage>>::iterator m_CurrentStage;
 
 		Vector<Ref<Actor>> m_Actors;
 		Vector<Ref<Actor>> m_PendingActors;

@@ -7,7 +7,7 @@
 namespace ly
 {
 	World::World()
-		: m_HasBegunPlay{false}, m_CurrentStageIndex{-1}
+		: m_HasBegunPlay{false}, m_CurrentStage{m_GameStages.end()}
 	{
 	}
 
@@ -18,7 +18,7 @@ namespace ly
 			m_HasBegunPlay = true;
 			BeginPlay();
 			InitGameStages();
-			NextGameStage();
+			StartStages();
 		}
 	}
 
@@ -37,8 +37,8 @@ namespace ly
 			++it;
 		}
 
-		if (m_CurrentStageIndex >= 0 && m_CurrentStageIndex < m_GameStages.size())
-			m_GameStages[m_CurrentStageIndex]->TickStage(deltaTime);
+		if (m_CurrentStage != m_GameStages.end())
+			m_CurrentStage->get()->TickStage(deltaTime);
 
 		Tick(deltaTime);
 	}
@@ -63,14 +63,6 @@ namespace ly
 			else
 				++it;
 		}
-
-		for (auto it = m_GameStages.begin(); it != m_GameStages.end();)
-		{
-			if (it->get()->IsStageFinished())
-				it = m_GameStages.erase(it);
-			else
-				++it;
-		}
 	}
 
 	void World::AddStage(const Ref<GameStage>& stage)
@@ -92,17 +84,24 @@ namespace ly
 
 	void World::AllGameStagesFinished()
 	{
+		LOG("All Stages Finished!");
 	}
 
 	void World::NextGameStage()
 	{
-		++m_CurrentStageIndex;
-		if (m_CurrentStageIndex >= 0 && m_CurrentStageIndex < m_GameStages.size())
+		m_CurrentStage = m_GameStages.erase(m_CurrentStage);
+		if (m_CurrentStage != m_GameStages.end())
 		{
-			m_GameStages[m_CurrentStageIndex]->OnStageFinished.Bind(GetWeakRef(), &World::NextGameStage);
-			m_GameStages[m_CurrentStageIndex]->StartStage();
+			m_CurrentStage->get()->StartStage();
+			m_CurrentStage->get()->OnStageFinished.Bind(GetWeakRef(), &World::NextGameStage);
 		}
 		else
 			AllGameStagesFinished();
+	}
+	void World::StartStages()
+	{
+		m_CurrentStage = m_GameStages.begin();
+		m_CurrentStage->get()->StartStage();
+		m_CurrentStage->get()->OnStageFinished.Bind(GetWeakRef(), &World::NextGameStage);
 	}
 }

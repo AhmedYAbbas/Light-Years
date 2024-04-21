@@ -32,6 +32,9 @@ add_library(${LIGHT_YEARS_CORE_TARGET_NAME} STATIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Gameplay/GameStage.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Gameplay/GameStage.cpp
 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Gameplay/WaitStage.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Gameplay/WaitStage.cpp
+
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/Application.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/Application.cpp
 )

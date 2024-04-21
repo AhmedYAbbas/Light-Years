@@ -19,11 +19,15 @@ namespace ly
 
     void TwinBladeStage::StartStage()
     {
+        GameStage::StartStage();
+
         m_SpawnTimerHandle = TimerManager::Get().SetTimer(GetWeakRef(), &TwinBladeStage::SpawnTwinBlade, m_SpawnInterval, true);
     }
 
     void TwinBladeStage::StageFinished()
     {
+        GameStage::StageFinished();
+
         TimerManager::Get().ClearTimer(m_SpawnTimerHandle);
     }
 
