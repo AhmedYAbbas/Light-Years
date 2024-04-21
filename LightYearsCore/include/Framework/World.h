@@ -3,13 +3,14 @@
 #include <SFML/Graphics.hpp>
 
 #include "Core/Core.h"
+#include "Framework/Object.h"
 
 namespace ly
 {
 	class Actor;
 	class Application;
 
-	class World
+	class World : public Object
 	{
 	public:
 		World();
@@ -31,8 +32,8 @@ namespace ly
 		void CleanCycle();
 
 	private:
-		void BeginPlay();
-		void Tick(float deltaTime);
+		virtual void BeginPlay();
+		virtual void Tick(float deltaTime);
 		
 	private:
 		Vector<Ref<Actor>> m_Actors;

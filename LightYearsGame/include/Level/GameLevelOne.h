@@ -12,6 +12,11 @@ namespace ly
 		GameLevelOne();
 
 	private:
+		virtual void BeginPlay() override;
+
+		void TimerCallback();
+
+	private:
 		WeakRef<PlayerSpaceship> playerSpaceship;
 	};
 }
