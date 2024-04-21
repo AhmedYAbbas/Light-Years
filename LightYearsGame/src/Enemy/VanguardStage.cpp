@@ -2,7 +2,6 @@
 
 #include "Enemy/VanguardStage.h"
 #include "Enemy/Vanguard.h"
-#include "Enemy/TwinBlade.h"
 
 namespace ly
 {

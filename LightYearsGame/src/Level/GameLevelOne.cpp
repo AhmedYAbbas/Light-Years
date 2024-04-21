@@ -1,10 +1,11 @@
 #include <Gameplay/WaitStage.h>
 
 #include "Level/GameLevelOne.h"
-#include "Enemy/Vanguard.h"
 #include "Player/PlayerSpaceship.h"
+
 #include "Enemy/VanguardStage.h"
 #include "Enemy/TwinBladeStage.h"
+#include "Enemy/HexagonStage.h"
 
 namespace ly
 {
@@ -20,7 +21,8 @@ namespace ly
 
 	void GameLevelOne::InitGameStages()
 	{
-		//AddStage(Ref<WaitStage>{CreateRef<WaitStage>(this, 5.f)});
+		AddStage(Ref<HexagonStage>{CreateRef<HexagonStage>(this)});
+		AddStage(Ref<WaitStage>{CreateRef<WaitStage>(this, 5.f)});
 		AddStage(Ref<VanguardStage>{CreateRef<VanguardStage>(this)});
 		AddStage(Ref<WaitStage>{CreateRef<WaitStage>(this, 15.f)});
 		AddStage(Ref<TwinBladeStage>{CreateRef<TwinBladeStage>(this)});
