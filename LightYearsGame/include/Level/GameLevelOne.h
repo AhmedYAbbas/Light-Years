@@ -1,10 +1,13 @@
 #pragma once
 
+#include <Framework/TimerManager.h>
+
 #include "Framework/World.h"
 
 namespace ly
 {
 	class PlayerSpaceship;
+	class TimerHandle;
 
 	class GameLevelOne : public World
 	{
@@ -17,6 +20,7 @@ namespace ly
 		void TimerCallback();
 
 	private:
-		WeakRef<PlayerSpaceship> playerSpaceship;
+		WeakRef<PlayerSpaceship> m_PlayerSpaceship;
+		TimerHandle m_TimerHandle;
 	};
 }

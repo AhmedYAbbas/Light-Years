@@ -3,7 +3,7 @@
 namespace ly
 {
 	Scope<TimerManager> TimerManager::s_Instance = nullptr;
-
+	unsigned int TimerHandle::s_TimerKeyCounter = 0;
 
 	TimerManager& TimerManager::Get()
 	{
@@ -15,10 +15,22 @@ namespace ly
 
 	void TimerManager::UpdateTimer(float deltaTime)
 	{
-		for (Timer& timer : m_Timers)
+		for (auto it = m_Timers.begin(); it != m_Timers.end();)
 		{
-			timer.TickTime(deltaTime);
+			if (it->second.Expired())
+				it = m_Timers.erase(it);
+			else
+			{
+				it->second.TickTime(deltaTime);
+				++it;
+			}
 		}
+	}
+
+	void TimerManager::ClearTimer(TimerHandle handle)
+	{
+		if (auto it = m_Timers.find(handle); it != m_Timers.end())
+			it->second.SetExpired();
 	}
 
 	Timer::Timer(WeakRef<Object> obj, std::function<void()> callback, float duration, bool repeat)
@@ -40,5 +52,15 @@ namespace ly
 			else
 				SetExpired();
 		}
+	}
+
+	TimerHandle::TimerHandle()
+		: m_TimerKey {GetNextTimerKey()}
+	{
+	}
+
+	bool operator==(const TimerHandle& rhs, const TimerHandle& lhs)
+	{
+		return rhs.GetTimerKey() == lhs.GetTimerKey();
 	}
 }

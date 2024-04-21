@@ -7,6 +7,29 @@
 
 namespace ly
 {
+	class TimerHandle
+	{
+	public:
+		TimerHandle();
+
+		inline unsigned int GetTimerKey() const { return m_TimerKey; }
+
+	private:
+		inline static unsigned int GetNextTimerKey() { return ++s_TimerKeyCounter; }
+
+	private:
+		unsigned int m_TimerKey;
+		static unsigned int s_TimerKeyCounter;
+	};
+
+	class TimerHandleHash
+	{
+	public:
+		size_t operator()(const TimerHandle& handle) const { return handle.GetTimerKey(); }
+	};
+
+	bool operator==(const TimerHandle& rhs, const TimerHandle& lhs);
+
 	class Timer
 	{
 	public:
@@ -30,23 +53,27 @@ namespace ly
 		static TimerManager& Get();
 
 		template<typename Class>
-		void SetTimer(WeakRef<Object> obj, void(Class::* callback)(), float duration, bool repeat = false)
+		TimerHandle SetTimer(WeakRef<Object> obj, void(Class::* callback)(), float duration, bool repeat = false)
 		{
-			m_Timers.push_back(Timer(obj, [=]()
+			TimerHandle handle;
+			m_Timers.insert({handle, Timer(obj, [=]()
 			{
 				(static_cast<Class*>(obj.lock().get())->*callback)();
 			},
 			duration,
-			repeat));
+			repeat)});
+
+			return handle;
 		}
 
 		void UpdateTimer(float deltaTime);
+		void ClearTimer(TimerHandle handle);
 
 	protected:
 		TimerManager() = default;
 
 	private:
-		Vector<Timer> m_Timers;
+		Dict<TimerHandle, Timer, TimerHandleHash> m_Timers;
 
 	private:
 		static Scope<TimerManager> s_Instance;

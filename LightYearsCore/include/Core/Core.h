@@ -34,8 +34,8 @@ using Vector = std::vector<T>;
 template<typename Key, typename Value>
 using Map = std::map<Key, Value>;
 
-template<typename Key, typename Value>
-using Dict = std::unordered_map<Key, Value>;
+template<typename Key, typename Value, typename Hasher = std::hash<Key>>
+using Dict = std::unordered_map<Key, Value, Hasher>;
 
 template<typename Key>
 using Set = std::unordered_set<Key>;
