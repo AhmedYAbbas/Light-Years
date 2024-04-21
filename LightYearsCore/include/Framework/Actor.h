@@ -40,7 +40,7 @@ namespace ly
 		inline const World* GetWorld() const { return m_World; }
 		inline World* GetWorld() { return m_World; }
 
-		bool IsActorOutOfWindowBounds() const;
+		bool IsActorOutOfWindowBounds(float allowance = 10.f) const;
 		void SetEnablePhysics(bool enable);
 
 		virtual void OnActorBeginOverlap(Actor* other);

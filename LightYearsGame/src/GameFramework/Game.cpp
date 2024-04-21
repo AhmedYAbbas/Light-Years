@@ -2,8 +2,8 @@
 
 #include "config.h"
 #include "GameFramework/Game.h"
-#include "Player/PlayerSpaceship.h"
 #include "Framework/AssetManager.h"
+#include "Level/GameLevelOne.h"
 
 namespace ly
 {
@@ -16,30 +16,6 @@ namespace ly
 		: Application {600, 980, "Light Years", sf::Style::Close | sf::Style::Titlebar}
 	{
 		AssetManager::Get().SetAssetRootDirectory(GetResourceDir());
-		WeakRef<World> world = LoadWorld<World>();
-		playerSpaceship = world.lock()->SpawnActor<PlayerSpaceship>();
-		playerSpaceship.lock()->SetActorLocation(sf::Vector2f(300.f, 490.f));
-
-		test = world.lock()->SpawnActor<Spaceship>();
-		test.lock()->SetTexture("SpaceShooterRedux/PNG/playerShip1_blue.png");
-		test.lock()->SetActorLocation(sf::Vector2f(100.f, 50.f));
-		test.lock()->SetTeamID(2);
-	}
-
-	void Game::Render()
-	{
-		Application::Render();
-	}
-
-	void Game::Tick(float deltaTime)
-	{
-		Application::Tick(deltaTime);
-
-		counter += deltaTime;
-		/*if (counter > 10.f)
-		{
-			if (!test.expired())
-				test.lock()->Destroy();
-		}*/
+		WeakRef<GameLevelOne> world = LoadWorld<GameLevelOne>();
 	}
 }

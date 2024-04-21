@@ -57,7 +57,7 @@ namespace ly
 		SetActorRotation(GetActorRotation() + offset);
 	}
 
-	bool Actor::IsActorOutOfWindowBounds() const
+	bool Actor::IsActorOutOfWindowBounds(float allowance) const
 	{
 		const float windowWidth = GetWindowSize().x;
 		const float windowHeight = GetWindowSize().y;
@@ -67,10 +67,10 @@ namespace ly
 
 		const sf::Vector2f& pos = GetActorLocation();
 
-		if (pos.x < -width)					return true;
-		if (pos.x > windowWidth + width)	return true;
-		if (pos.y < -height)				return true;
-		if (pos.y > windowHeight + height)	return true;
+		if (pos.x < -width - allowance)					return true;
+		if (pos.x > windowWidth + width + allowance)	return true;
+		if (pos.y < -height - allowance)				return true;
+		if (pos.y > windowHeight + height + allowance)	return true;
 
 		return false;
 	}
@@ -101,6 +101,9 @@ namespace ly
 
 	bool Actor::IsOtherHostile(Actor* other)
 	{
+		if (!other)
+			return false;
+
 		if (m_TeamID == s_NeutralTeamID || other->m_TeamID == s_NeutralTeamID)
 			return false;
 
