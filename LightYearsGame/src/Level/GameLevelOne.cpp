@@ -20,9 +20,9 @@ namespace ly
 
 	void GameLevelOne::InitGameStages()
 	{
-		AddStage(Ref<WaitStage>{CreateRef<WaitStage>(this, 5.f)});
-		AddStage(Ref<TwinBladeStage>{CreateRef<TwinBladeStage>(this)});
-		AddStage(Ref<WaitStage>{CreateRef<WaitStage>(this, 15.f)});
+		//AddStage(Ref<WaitStage>{CreateRef<WaitStage>(this, 5.f)});
 		AddStage(Ref<VanguardStage>{CreateRef<VanguardStage>(this)});
+		AddStage(Ref<WaitStage>{CreateRef<WaitStage>(this, 15.f)});
+		AddStage(Ref<TwinBladeStage>{CreateRef<TwinBladeStage>(this)});
 	}
 }
