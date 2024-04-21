@@ -2,6 +2,7 @@
 #include "Enemy/Vanguard.h"
 #include "Player/PlayerSpaceship.h"
 #include "Enemy/VanguardStage.h"
+#include "Enemy/TwinBladeStage.h"
 
 namespace ly
 {
@@ -17,6 +18,7 @@ namespace ly
 
 	void GameLevelOne::InitGameStages()
 	{
+		AddStage(Ref<TwinBladeStage>{CreateRef<TwinBladeStage>(this)});
 		AddStage(Ref<VanguardStage>{CreateRef<VanguardStage>(this)});
 	}
 }

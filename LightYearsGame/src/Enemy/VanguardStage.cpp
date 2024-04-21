@@ -1,7 +1,8 @@
-#include <Framework/Application.h>
+#include <Framework/World.h>
 
 #include "Enemy/VanguardStage.h"
 #include "Enemy/Vanguard.h"
+#include "Enemy/TwinBlade.h"
 
 namespace ly
 {
@@ -24,7 +25,7 @@ namespace ly
 	{
 		GameStage::StartStage();
 
-		sf::Vector2u windowSize = Application::Get().GetWindowSize();
+		sf::Vector2u windowSize = GetWorld()->GetWindowSize();
 		m_LeftSpawnLoc = sf::Vector2f {m_SpawnDistanceToEdge, -100.f};
 		m_RightSpawnLoc = sf::Vector2f {windowSize.x - m_SpawnDistanceToEdge, -100.f};
 

@@ -38,12 +38,14 @@ namespace ly
 	void Actor::SetActorLocation(const sf::Vector2f& pos)
 	{
 		m_Sprite.setPosition(pos);
+		m_Sprite.getTransform();
 		UpdatePhysicsBodyTransform();
 	}
 
 	void Actor::SetActorRotation(float angle)
 	{
 		m_Sprite.setRotation(angle);
+		m_Sprite.getTransform();
 		UpdatePhysicsBodyTransform();
 	}
 

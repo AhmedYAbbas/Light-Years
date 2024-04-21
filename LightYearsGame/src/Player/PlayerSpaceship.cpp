@@ -6,7 +6,7 @@
 namespace ly
 {
 	PlayerSpaceship::PlayerSpaceship(World* world, const std::string& filepath)
-		: Spaceship {world, filepath}, m_MoveInput {0, 0}, m_Speed {200.f}, m_Shooter {CreateScope<BulletShooter>(this, 0.1f)}
+		: Spaceship {world, filepath}, m_MoveInput {0, 0}, m_Speed {200.f}, m_Shooter {CreateScope<BulletShooter>(this, 0.1f, sf::Vector2f{50.f, 0.f})}
 	{
 		SetTeamID(1);
 	}
