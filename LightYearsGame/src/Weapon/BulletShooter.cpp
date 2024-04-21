@@ -22,8 +22,8 @@ namespace ly
 
 	void BulletShooter::ShootImpl()
 	{
-		sf::Vector2f ownerForwardDirection = GetOwner()->GetForwardDirection();
-		sf::Vector2f ownerRightDirection = GetOwner()->GetRightDirection();
+		const sf::Vector2f ownerForwardDirection = GetOwner()->GetForwardDirection();
+		const sf::Vector2f ownerRightDirection = GetOwner()->GetRightDirection();
 
 		m_CooldownClock.restart();
 		WeakRef<Bullet> newBullet = GetOwner()->GetWorld()->SpawnActor<Bullet>(GetOwner(), "SpaceShooterRedux/PNG/Lasers/laserBlue01.png");
