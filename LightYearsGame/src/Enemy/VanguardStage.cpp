@@ -43,8 +43,7 @@ namespace ly
 	{
 		WeakRef<Vanguard> vanguard = GetWorld()->SpawnActor<Vanguard>();
 		vanguard.lock()->SetActorLocation(m_SpawnLoc);
-		++m_CurrentRowVanguardCount;
-		if (m_CurrentRowVanguardCount == m_VanguardsPerRow)
+		if (++m_CurrentRowVanguardCount == m_VanguardsPerRow)
 		{
 			TimerManager::Get().ClearTimer(m_SpawnTimerHandle);
 			m_SwitchTimerHandle = TimerManager::Get().SetTimer(GetWeakRef(), &VanguardStage::SwitchRow, m_SwitchInterval, false);

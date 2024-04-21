@@ -6,8 +6,7 @@
 #include "Enemy/VanguardStage.h"
 #include "Enemy/TwinBladeStage.h"
 #include "Enemy/HexagonStage.h"
-
-#include "Enemy/UFO.h"
+#include "Enemy/UFOStage.h"
 
 namespace ly
 {
@@ -19,12 +18,12 @@ namespace ly
 
 	void GameLevelOne::BeginPlay()
 	{
-		WeakRef<UFO> ufo = SpawnActor<UFO>();
-		ufo.lock()->SetActorLocation({GetWindowSize().x / 2.f, GetWindowSize().y / 2.f});
 	}
 
 	void GameLevelOne::InitGameStages()
 	{
+		AddStage(Ref<UFOStage>{CreateRef<UFOStage>(this)});
+
 		AddStage(Ref<WaitStage>{CreateRef<WaitStage>(this, 5.f)});
 		AddStage(Ref<VanguardStage>{CreateRef<VanguardStage>(this)});
 

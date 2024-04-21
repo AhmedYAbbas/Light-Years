@@ -40,8 +40,7 @@ namespace ly
         else
             m_SpawnLoc = m_LeftSpawnLoc;
 
-        ++m_CurrentSpawnCount;
-        if (m_CurrentSpawnCount == m_SpawnAmount)
+        if (++m_CurrentSpawnCount == m_SpawnAmount)
         {
             m_CurrentSpawnCount = 0;
             FinishStage();

@@ -3,7 +3,7 @@
 
 namespace ly
 {
-	UFO::UFO(World* world, const std::string& texturePath, const sf::Vector2f& velocity, float rotationSpeed)
+	UFO::UFO(World* world, const sf::Vector2f& velocity, const std::string& texturePath, float rotationSpeed)
 		: EnemySpaceship{world, texturePath}, m_RotationSpeed{rotationSpeed}
 	{
 		SetVelocity(velocity);
@@ -26,8 +26,8 @@ namespace ly
 
 	void UFO::InitializeShooters()
 	{
-		m_Shooters.push_back(CreateScope<BulletShooter>(this, 1.f, sf::Vector2f {0.f, 0.f}, -60.f));
-		m_Shooters.push_back(CreateScope<BulletShooter>(this, 1.f, sf::Vector2f {0.f, 0.f}, 60.f));
-		m_Shooters.push_back(CreateScope<BulletShooter>(this, 1.f, sf::Vector2f {0.f, 0.f}, 180.f));
+		m_Shooters.push_back(CreateScope<BulletShooter>(this, 0.5f, sf::Vector2f {0.f, 0.f}, -60.f));
+		m_Shooters.push_back(CreateScope<BulletShooter>(this, 0.5f, sf::Vector2f {0.f, 0.f}, 60.f));
+		m_Shooters.push_back(CreateScope<BulletShooter>(this, 0.5f, sf::Vector2f {0.f, 0.f}, 180.f));
 	}
 }
