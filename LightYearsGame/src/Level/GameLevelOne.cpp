@@ -12,8 +12,6 @@ namespace ly
 {
 	GameLevelOne::GameLevelOne()
 	{
-		m_PlayerSpaceship = SpawnActor<PlayerSpaceship>();
-		m_PlayerSpaceship.lock()->SetActorLocation(sf::Vector2f(300.f, 490.f));
 	}
 
 	void GameLevelOne::BeginPlay()
