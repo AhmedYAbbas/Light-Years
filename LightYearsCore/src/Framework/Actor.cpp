@@ -97,8 +97,8 @@ namespace ly
 	void Actor::Destroy()
 	{
 		UninitializePhysics();
+		OnActorDestroyed.Broadcast(this);
 		Object::Destroy();
-
 	}
 
 	bool Actor::IsOtherHostile(Actor* other)

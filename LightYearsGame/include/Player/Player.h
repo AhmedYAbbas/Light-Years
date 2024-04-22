@@ -6,6 +6,7 @@
 namespace ly
 {
 	class PlayerSpaceship;
+	class World;
 
 	class Player : public Object
 	{

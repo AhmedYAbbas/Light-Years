@@ -6,6 +6,7 @@
 #include "Utility/Math.h"
 #include "Framework/Object.h"
 #include "Framework/World.h"
+#include "Framework/Delegate.h"
 
 class b2Body;
 
@@ -68,6 +69,9 @@ namespace ly
 		void InitializePhysics();
 		void UninitializePhysics();
 		void UpdatePhysicsBodyTransform();
+
+	public:
+		Delegate<Actor*> OnActorDestroyed;
 
 	private:
 		World* m_World;

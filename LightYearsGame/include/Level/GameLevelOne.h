@@ -18,6 +18,9 @@ namespace ly
 		virtual void BeginPlay() override;
 		virtual void InitGameStages() override;
 
+		void OnPlayerSpaceshipDestroyed(Actor* destroyedPlayerSpaceship);
+		void GameOver();
+
 	private:
 		WeakRef<PlayerSpaceship> m_PlayerSpaceship;
 		TimerHandle m_TimerHandle;
