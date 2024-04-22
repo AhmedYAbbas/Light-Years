@@ -40,7 +40,12 @@ namespace ly
 	{
 		Scope<Explosion> explosion = CreateScope<Explosion>();
 		explosion->SpawnExplosion(GetWorld(), GetActorLocation());
+		PreDestruction();
 		Destroy();
+	}
+
+	void Spaceship::PreDestruction()
+	{
 	}
 
 	void Spaceship::Blink()

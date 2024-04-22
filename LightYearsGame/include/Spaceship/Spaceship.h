@@ -16,6 +16,9 @@ namespace ly
 		virtual void Shoot();
 		virtual void TakeDamage(float amount) override;
 
+		inline const HealthComponent& GetHealthComponent() const { return m_HealthComponent; }
+		inline HealthComponent& GetHealthComponent() { return m_HealthComponent; }
+
 	protected:
 		virtual void BeginPlay() override;
 		virtual void Tick(float deltaTime) override;
@@ -23,8 +26,9 @@ namespace ly
 	private:
 		virtual void OnHealthChanged(float amount, float health, float maxHealth);
 		virtual void OnTakenDamage(float amount, float health, float maxHealth);
-		virtual void Blow();
+		virtual void PreDestruction();
 
+		void Blow();
 		void Blink();
 		void UpdateBlink(float deltaTime);
 

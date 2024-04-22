@@ -11,9 +11,11 @@ namespace ly
 		PlayerSpaceship(World* world, const std::string& filepath = "SpaceShooterRedux/PNG/playerShip1_blue.png");
 
 		virtual void Tick(float deltaTime) override;
+		virtual void Shoot() override;
+
 		inline void SetSpeed(float speed) { m_Speed = speed; }
 		inline float GetSpeed() const { return m_Speed; }
-		virtual void Shoot() override;
+		inline void SetShooter(Scope<Shooter> shooter) { m_Shooter = std::move(shooter); }
 
 	private:
 		void HandleInput();
