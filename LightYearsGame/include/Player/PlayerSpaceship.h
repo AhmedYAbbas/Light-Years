@@ -15,7 +15,7 @@ namespace ly
 
 		inline void SetSpeed(float speed) { m_Speed = speed; }
 		inline float GetSpeed() const { return m_Speed; }
-		inline void SetShooter(Scope<Shooter> shooter) { m_Shooter = std::move(shooter); }
+		void SetShooter(Scope<Shooter> shooter);
 
 	private:
 		void HandleInput();

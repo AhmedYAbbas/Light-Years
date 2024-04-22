@@ -7,7 +7,7 @@
 namespace ly
 {
 	Actor::Actor(World* world, const std::string& filepath)
-		: m_World{world}, m_HasBegunPlay{false}, m_PhysicsBody{nullptr}, m_PhysicsEnabled{false}
+		: m_World{world}, m_HasBegunPlay{false}, m_PhysicsBody{nullptr}, m_PhysicsEnabled{false}, m_TeamID(s_NeutralTeamID)
 	{
 		SetTexture(filepath);
 	}

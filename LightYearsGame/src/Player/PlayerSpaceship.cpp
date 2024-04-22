@@ -8,7 +8,7 @@
 namespace ly
 {
 	PlayerSpaceship::PlayerSpaceship(World* world, const std::string& filepath)
-		: Spaceship {world, filepath}, m_MoveInput {0, 0}, m_Speed {200.f}, m_Shooter {CreateScope<FrontalWiper>(this, 0.1f, sf::Vector2f{50.f, 0.f})}
+		: Spaceship {world, filepath}, m_MoveInput {0, 0}, m_Speed {200.f}, m_Shooter {CreateScope<BulletShooter>(this, 0.1f, sf::Vector2f{50.f, 0.f})}
 	{
 		SetTeamID(1);
 	}
@@ -26,6 +26,17 @@ namespace ly
 
 		if (m_Shooter)
 			m_Shooter->Shoot();
+	}
+
+	void PlayerSpaceship::SetShooter(Scope<Shooter> shooter)
+	{
+		if (m_Shooter && typeid(*m_Shooter.get()) == typeid(*shooter.get()))
+		{
+			m_Shooter->IncrementLevel();
+			return;
+		}
+
+		m_Shooter = std::move(shooter);
 	}
 
 	void PlayerSpaceship::HandleInput()
