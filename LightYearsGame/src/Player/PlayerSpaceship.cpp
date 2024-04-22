@@ -3,11 +3,12 @@
 
 #include "Player/PlayerSpaceship.h"
 #include "Weapon/ThreeWayShooter.h"
+#include "Weapon/FrontalWiper.h"
 
 namespace ly
 {
 	PlayerSpaceship::PlayerSpaceship(World* world, const std::string& filepath)
-		: Spaceship {world, filepath}, m_MoveInput {0, 0}, m_Speed {200.f}, m_Shooter {CreateScope<ThreeWayShooter>(this, 0.1f, sf::Vector2f{50.f, 0.f})}
+		: Spaceship {world, filepath}, m_MoveInput {0, 0}, m_Speed {200.f}, m_Shooter {CreateScope<FrontalWiper>(this, 0.1f, sf::Vector2f{50.f, 0.f})}
 	{
 		SetTeamID(1);
 	}
