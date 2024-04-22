@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Spaceship/Spaceship.h"
-#include "Weapon/BulletShooter.h"
+#include "Weapon/Shooter.h"
 
 namespace ly
 {
@@ -24,6 +24,6 @@ namespace ly
 	private:
 		sf::Vector2f m_MoveInput;
 		float m_Speed;
-		Scope<BulletShooter> m_Shooter;
+		Scope<Shooter> m_Shooter;
 	};
 }
