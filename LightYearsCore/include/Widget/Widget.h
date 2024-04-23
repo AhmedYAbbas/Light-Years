@@ -21,7 +21,7 @@ namespace ly
 		inline void SetVisibility(bool visibility) { m_IsVisible = visibility; }
 		inline bool IsVisible() const { return m_IsVisible; }
 
-		virtual sf::FloatRect GetBounds() const;
+		virtual sf::FloatRect GetBounds() const = 0;
 		sf::Vector2f GetCenterPosition() const;
 
 	protected:

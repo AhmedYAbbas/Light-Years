@@ -7,17 +7,24 @@ namespace ly
 {
 	GameplayHUD::GameplayHUD()
 		: m_FrameRateText{"Frame Rate:"},
+		m_PlayerHealthBar{},
+		m_PlayerLifeIcon {"SpaceShooterRedux/PNG/pickups/playerLife1_blue.png"},
+		m_PlayerLifeCountText{""},
 		m_NormalHealthBarColor{128, 255, 128},
 		m_CriticalHealthBarColor{255, 0, 0},
-		m_CriticalThreshold{0.3}
+		m_CriticalThreshold{0.3},
+		m_WidgetSpacing{10.f}
 	{
 		m_FrameRateText.SetTextSize(30);
+		m_PlayerLifeCountText.SetTextSize(20);
 	}
 
 	void GameplayHUD::Draw(sf::RenderWindow& window)
 	{
 		m_FrameRateText.NativeDraw(window);
 		m_PlayerHealthBar.NativeDraw(window);
+		m_PlayerLifeIcon.NativeDraw(window);
+		m_PlayerLifeCountText.NativeDraw(window);
 	}
 
 	void GameplayHUD::Tick(float deltaTime)
@@ -32,7 +39,16 @@ namespace ly
 	{
 		auto windowSize = window.getSize();
 		m_PlayerHealthBar.SetWidgetPosition({20.f, windowSize.y - 50.f});
+
+		sf::Vector2f nextWidgetPosition = m_PlayerHealthBar.GetWidgetPosition();
+		nextWidgetPosition += {m_PlayerHealthBar.GetBounds().width + m_WidgetSpacing, 0.f};
+		m_PlayerLifeIcon.SetWidgetPosition(nextWidgetPosition);
+
+		nextWidgetPosition += {m_PlayerLifeIcon.GetBounds().width + m_WidgetSpacing, 0.f};
+		m_PlayerLifeCountText.SetWidgetPosition(nextWidgetPosition);
+
 		RefreshHealthBar();
+		SetupPlayerLifeCount();
 	}
 
 	void GameplayHUD::OnPlayerHealthUpdated(float amount, float currentHealth, float maxHealth)
@@ -49,6 +65,11 @@ namespace ly
 		RefreshHealthBar();
 	}
 
+	void GameplayHUD::OnPlayerLifeCountUpdated(int count)
+	{
+		m_PlayerLifeCountText.SetString(std::to_string(count));
+	}
+
 	void GameplayHUD::RefreshHealthBar()
 	{
 		Player* player = PlayerManager::Get().GetPlayer();
@@ -60,6 +81,17 @@ namespace ly
 			healthComp.OnHealthChanged.Bind(GetWeakRef(), &GameplayHUD::OnPlayerHealthUpdated);
 			m_PlayerHealthBar.UpdateValue(healthComp.GetHealth(), healthComp.GetMaxHealth());
 			OnPlayerHealthUpdated(0, healthComp.GetHealth(), healthComp.GetMaxHealth());
+		}
+	}
+
+	void GameplayHUD::SetupPlayerLifeCount()
+	{
+		Player* player = PlayerManager::Get().GetPlayer();
+		if (player)
+		{
+			int lifeCount = player->GetLifeCount();
+			m_PlayerLifeCountText.SetString(std::to_string(lifeCount));
+			player->OnLifeChanged.Bind(GetWeakRef(), &GameplayHUD::OnPlayerLifeCountUpdated);
 		}
 	}
 }

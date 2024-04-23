@@ -3,6 +3,7 @@
 #include <Widget/HUD.h>
 #include <Widget/TextWidget.h>
 #include <Widget/ValueGauge.h>
+#include <Widget/ImageWidget.h>
 
 namespace ly
 {
@@ -20,13 +21,21 @@ namespace ly
 		virtual void Init(const sf::RenderWindow& window) override;
 		void OnPlayerHealthUpdated(float amount, float currentHealth, float maxHealth);
 		void OnPlayerSpaceshipDestroyed(Actor* destroyedPlayerSpaceship);
+		void OnPlayerLifeCountUpdated(int count);
+
 		void RefreshHealthBar();
+		void SetupPlayerLifeCount();
 
 	private:
 		TextWidget m_FrameRateText;
 		ValueGauge m_PlayerHealthBar;
+		ImageWidget m_PlayerLifeIcon;
+		TextWidget m_PlayerLifeCountText;
+
 		sf::Color m_NormalHealthBarColor;
 		sf::Color m_CriticalHealthBarColor;
 		float m_CriticalThreshold;
+
+		float m_WidgetSpacing;
 	};
 }
