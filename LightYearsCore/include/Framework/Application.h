@@ -14,14 +14,14 @@ namespace ly
 		
 		static Application& Get() { return *s_Instance; }
 		void Run();
+		void Quit();
 
 		template<typename T>
 		inline WeakRef<T> LoadWorld()
 		{
-			Ref<T> newWorld = CreateRef<T>();
-			m_CurrentWorld = newWorld;
-			m_CurrentWorld->BeginPlayInternal();
-			return newWorld;
+			Ref<T> world = CreateRef<T>();
+			m_PendingWorld = world;
+			return world;
 		}
 
 		sf::RenderWindow& GetWindow() { return m_Window; }
@@ -46,6 +46,7 @@ namespace ly
 		float m_TargetDeltaTime;
 		
 		Ref<World> m_CurrentWorld;
+		Ref<World> m_PendingWorld;
 		sf::Clock m_CleanCycleClock;
 		float m_CleanCycleInterval;
 

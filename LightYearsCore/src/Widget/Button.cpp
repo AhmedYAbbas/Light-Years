@@ -49,11 +49,13 @@ namespace ly
 			if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
 			{
 				if (m_Sprite.getGlobalBounds().contains(event.mouseMove.x, event.mouseMove.y))
+				{
 					ButtonHovered();
+					handled = true;
+				}
 				else
 					ButtonUp();
 
-				handled = true;
 			}
 		}
 

@@ -20,7 +20,6 @@ namespace ly
 		m_FrameRateText.SetTextSize(30);
 		m_PlayerLifeCountText.SetTextSize(20);
 		m_PlayerScoreText.SetTextSize(20);
-		m_TestButton.GetTextWidget().SetTextSize(20);
 	}
 
 	void GameplayHUD::Draw(sf::RenderWindow& window)
@@ -31,7 +30,6 @@ namespace ly
 		m_PlayerLifeCountText.NativeDraw(window);
 		m_PlayerScoreIcon.NativeDraw(window);
 		m_PlayerScoreText.NativeDraw(window);
-		m_TestButton.NativeDraw(window);
 	}
 
 	void GameplayHUD::Tick(float deltaTime)
@@ -44,7 +42,7 @@ namespace ly
 
 	bool GameplayHUD::HandleEvent(const sf::Event& event)
 	{
-		return m_TestButton.HandleEvent(event) || HUD::HandleEvent(event);
+		return HUD::HandleEvent(event);
 	}
 
 	void GameplayHUD::Init(const sf::RenderWindow& window)
@@ -64,9 +62,6 @@ namespace ly
 		
 		nextWidgetPosition += {m_PlayerScoreIcon.GetBounds().width + m_WidgetSpacing, 0.f};
 		m_PlayerScoreText.SetWidgetPosition(nextWidgetPosition);
-
-		m_TestButton.SetWidgetPosition({windowSize.x / 2.f, windowSize.y / 2.f});
-		m_TestButton.OnButtonClicked.Bind(GetWeakRef(), &GameplayHUD::OnButtonClickedTest);
 
 		RefreshHealthBar();
 		SetupPlayerStatus();
@@ -123,10 +118,5 @@ namespace ly
 			m_PlayerScoreText.SetString(std::to_string(playerScore));
 			player->OnScoreChanged.Bind(GetWeakRef(), &GameplayHUD::OnPlayerScoreChanged);
 		}
-	}
-
-	void GameplayHUD::OnButtonClickedTest()
-	{
-		LOG("Button clicked!");
 	}
 }

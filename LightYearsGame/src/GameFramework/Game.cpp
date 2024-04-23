@@ -4,6 +4,7 @@
 #include "GameFramework/Game.h"
 #include "Framework/AssetManager.h"
 #include "Level/GameLevelOne.h"
+#include "Level/MainMenuLevel.h"
 
 namespace ly
 {
@@ -16,6 +17,6 @@ namespace ly
 		: Application {600, 980, "Light Years", sf::Style::Close | sf::Style::Titlebar}
 	{
 		AssetManager::Get().SetAssetRootDirectory(GetResourceDir());
-		WeakRef<GameLevelOne> world = LoadWorld<GameLevelOne>();
+		WeakRef<MainMenuLevel> world = LoadWorld<MainMenuLevel>();
 	}
 }

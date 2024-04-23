@@ -27,7 +27,7 @@ namespace ly
 			{
 				if (event.type == sf::Event::EventType::Closed)
 				{
-					m_Window.close();
+					Quit();
 				}
 				else
 					DispatchEvent(event);
@@ -42,6 +42,11 @@ namespace ly
 				RenderInternal();
 			}
 		}
+	}
+
+	void Application::Quit()
+	{
+		m_Window.close();
 	}
 
 	void Application::TickInternal(float deltaTime)
@@ -64,6 +69,12 @@ namespace ly
 			// TODO:: Separate the world clean cycle from the asset manager clean cycle
 			if (m_CurrentWorld)
 				m_CurrentWorld->CleanCycle();
+		}
+
+		if (m_PendingWorld && m_PendingWorld != m_CurrentWorld)
+		{
+			m_CurrentWorld = m_PendingWorld;
+			m_CurrentWorld->BeginPlayInternal();
 		}
 	}
 
