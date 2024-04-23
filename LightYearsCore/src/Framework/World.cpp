@@ -42,8 +42,12 @@ namespace ly
 
 		Tick(deltaTime);
 
-		if (m_HUD && m_HUD->IsInit())
-			m_HUD->NativeInit(Application::Get().GetWindow());
+		if (m_HUD)
+		{
+			if (!m_HUD->IsInit())
+				m_HUD->NativeInit(Application::Get().GetWindow());
+			m_HUD->Tick(deltaTime);
+		}
 	}
 
 	void World::Render(sf::RenderWindow& window)

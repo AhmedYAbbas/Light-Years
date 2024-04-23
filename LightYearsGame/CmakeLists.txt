@@ -67,6 +67,9 @@ add_executable(${LIGHT_YEARS_GAME_TARGET_NAME}
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Player/Reward.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Player/Reward.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Widget/GameplayHUD.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Widget/GameplayHUD.cpp
 )
 
 target_include_directories(${LIGHT_YEARS_GAME_TARGET_NAME} PUBLIC

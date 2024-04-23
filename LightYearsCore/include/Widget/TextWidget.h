@@ -8,7 +8,7 @@ namespace ly
 	class TextWidget : public Widget
 	{
 	public:
-		TextWidget(const std::string& textStr, const std::string& fontPath = "SpaceShooterRedux/Bouns/kenvector_future.ttf", unsigned int characterSize = 10);
+		TextWidget(const std::string& textStr, const std::string& fontPath = "SpaceShooterRedux/Bonus/kenvector_future.ttf", unsigned int characterSize = 10);
 
 		inline void SetString(const std::string& str) { m_Text.setString(str); }
 		inline void SetTextSize(unsigned int size) { m_Text.setCharacterSize(size); }

@@ -54,7 +54,6 @@ namespace ly
 
 		TimerManager::Get().UpdateTimer(deltaTime);
 
-		// TODO: Implemet a fixed delta time to proporly calculate physics
 		PhysicsSystem::Get().Step(deltaTime);
 
 		if (m_CleanCycleClock.getElapsedTime().asSeconds() >= m_CleanCycleInterval)
