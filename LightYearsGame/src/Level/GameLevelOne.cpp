@@ -20,7 +20,7 @@ namespace ly
 
 	void GameLevelOne::BeginPlay()
 	{
-		Player player = PlayerManager::Get().CreateNewPlayer();
+		Player& player = PlayerManager::Get().CreateNewPlayer();
 		m_PlayerSpaceship = player.SpawnSpaceship(this);
 		m_PlayerSpaceship.lock()->OnActorDestroyed.Bind(GetWeakRef(), &GameLevelOne::OnPlayerSpaceshipDestroyed);
 

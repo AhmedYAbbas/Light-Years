@@ -15,9 +15,9 @@ namespace ly
 		Actor::BeginPlay();
 		SetEnablePhysics(true);
 
-		m_HealthComponent.onHealthChanged.Bind(GetWeakRef(), &Spaceship::OnHealthChanged);
-		m_HealthComponent.onTakenDamage.Bind(GetWeakRef(), &Spaceship::OnTakenDamage);
-		m_HealthComponent.onHealthEmpty.Bind(GetWeakRef(), &Spaceship::Blow);
+		m_HealthComponent.OnHealthChanged.Bind(GetWeakRef(), &Spaceship::OnHealthChanged);
+		m_HealthComponent.OnTakenDamage.Bind(GetWeakRef(), &Spaceship::OnTakenDamage);
+		m_HealthComponent.OnHealthEmpty.Bind(GetWeakRef(), &Spaceship::Blow);
 	}
 
 	void Spaceship::Tick(float deltaTime)

@@ -22,7 +22,10 @@ namespace ly
 			return m_CurrentPlayerSpaceship;
 		}
 		else
+		{
+			m_CurrentPlayerSpaceship = WeakRef<PlayerSpaceship>{};
 			OnLifeExhausted.Broadcast();
+		}
 
 		return WeakRef<PlayerSpaceship>{};
 	}

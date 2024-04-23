@@ -18,9 +18,9 @@ namespace ly
 		void HealthEmpty();
 
 	public:
-		Delegate<float, float, float> onHealthChanged;
-		Delegate<float, float, float> onTakenDamage;
-		Delegate<> onHealthEmpty;
+		Delegate<float, float, float> OnHealthChanged;
+		Delegate<float, float, float> OnTakenDamage;
+		Delegate<> OnHealthEmpty;
 
 	private:
 		float m_Health;

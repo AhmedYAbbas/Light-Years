@@ -11,7 +11,7 @@ namespace ly
 	public:
 		static AssetManager& Get();
 		Ref<sf::Texture> LoadTexture(const std::string& filepath);
-		Ref<sf::Font> LoadFont(const std::string& filepath);
+		Ref<sf::Font> LoadFont(const std::string& filepath = "SpaceShooterRedux/Bonus/kenvector_future.ttf");
 		void SetAssetRootDirectory(const std::string& directory);
 		void CleanCycle();
 
