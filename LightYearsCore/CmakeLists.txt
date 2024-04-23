@@ -40,6 +40,9 @@ add_library(${LIGHT_YEARS_CORE_TARGET_NAME} STATIC
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Widget/HUD.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Widget/HUD.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Widget/Widget.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Widget/Widget.cpp
 )
 
 target_include_directories(${LIGHT_YEARS_CORE_TARGET_NAME} PUBLIC
