@@ -19,7 +19,7 @@ namespace ly
 		inline float GetWidgetRotation() const { return m_Transform.getRotation(); }
 
 		inline void SetVisibility(bool visibility) { m_IsVisible = visibility; }
-		inline bool IsVisible() const {return m_IsVisible}
+		inline bool IsVisible() const { return m_IsVisible; }
 
 	protected:
 		Widget();

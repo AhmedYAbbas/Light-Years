@@ -79,6 +79,8 @@ namespace ly
 	{
 		if (m_HUD)
 			return m_HUD->HandleEvent(event);
+
+		return false;
 	}
 
 	void World::BeginPlay()

@@ -30,7 +30,7 @@ namespace ly
 
 	void PlayerSpaceship::SetShooter(Scope<Shooter> shooter)
 	{
-		if (m_Shooter && typeid(*m_Shooter.get()) == typeid(*shooter.get()))
+		if (m_Shooter && typeid(*m_Shooter) == typeid(*shooter))
 		{
 			m_Shooter->IncrementLevel();
 			return;

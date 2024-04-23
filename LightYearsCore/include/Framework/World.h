@@ -7,7 +7,7 @@
 
 namespace ly
 {
-	class HUD
+	class HUD;
 	class Actor;
 	class Application;
 	class GameStage;

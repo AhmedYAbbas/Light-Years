@@ -32,6 +32,21 @@ namespace ly
 		return nullptr;
 	}
 
+	Ref<sf::Font> AssetManager::LoadFont(const std::string& filepath)
+	{
+		if (m_LoadedFontMap.find(filepath) != m_LoadedFontMap.end())
+			return m_LoadedFontMap[filepath];
+
+		Ref<sf::Font> font = CreateRef<sf::Font>();
+		if (font->loadFromFile(m_RootDirectory + filepath))
+		{
+			m_LoadedFontMap[filepath] = font;
+			return font;
+		}
+
+		return nullptr;
+	}
+
 	void AssetManager::SetAssetRootDirectory(const std::string& directory)
 	{
 		m_RootDirectory = directory;
@@ -43,6 +58,14 @@ namespace ly
 		{
 			if (it->second.use_count() == 1)
 				it = m_LoadedTextureMap.erase(it);
+			else
+				it++;
+		}
+
+		for (auto it = m_LoadedFontMap.begin(); it != m_LoadedFontMap.end();)
+		{
+			if (it->second.use_count() == 1)
+				it = m_LoadedFontMap.erase(it);
 			else
 				it++;
 		}

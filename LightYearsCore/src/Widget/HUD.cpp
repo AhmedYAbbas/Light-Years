@@ -21,7 +21,7 @@ namespace ly
 	{
 	}
 
-	void HUD::Init(sf::RenderWindow& window)
+	void HUD::Init(const sf::RenderWindow& window)
 	{
 	}
 }
