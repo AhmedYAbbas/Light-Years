@@ -10,6 +10,8 @@ namespace ly
 	public:
 		EnemySpaceship(World* world, const std::string& texturePath, float collisionDamage = 200.f, Vector<RewardFactoryFunc> rewards = {CreateHealthReward, CreateThreeWayShooterReward, CreateFrontalWiperShooterReward});
 
+		inline void SetScoreAwardAmount(int amount) { m_ScoreAwardAmount = amount; }
+
 	protected:
 		virtual void Tick(float deltaTime) override;
 
@@ -21,6 +23,7 @@ namespace ly
 
 	private:
 		float m_CollisionDamage;
+		int m_ScoreAwardAmount;
 		Vector<RewardFactoryFunc> m_RewardFactories;
 	};
 }

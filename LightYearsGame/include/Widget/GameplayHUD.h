@@ -22,15 +22,18 @@ namespace ly
 		void OnPlayerHealthUpdated(float amount, float currentHealth, float maxHealth);
 		void OnPlayerSpaceshipDestroyed(Actor* destroyedPlayerSpaceship);
 		void OnPlayerLifeCountUpdated(int count);
+		void OnPlayerScoreChanged(int score);
 
 		void RefreshHealthBar();
-		void SetupPlayerLifeCount();
+		void SetupPlayerStatus();
 
 	private:
 		TextWidget m_FrameRateText;
 		ValueGauge m_PlayerHealthBar;
 		ImageWidget m_PlayerLifeIcon;
 		TextWidget m_PlayerLifeCountText;
+		ImageWidget m_PlayerScoreIcon;
+		TextWidget m_PlayerScoreText;
 
 		sf::Color m_NormalHealthBarColor;
 		sf::Color m_CriticalHealthBarColor;
