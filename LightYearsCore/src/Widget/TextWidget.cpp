@@ -13,7 +13,7 @@ namespace ly
 		window.draw(m_Text);
 	}
 
-	void TextWidget::UpdatePosition(const sf::Vector2f position)
+	void TextWidget::UpdatePosition(const sf::Vector2f& position)
 	{
 		m_Text.setPosition(position);
 	}

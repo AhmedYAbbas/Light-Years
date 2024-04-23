@@ -19,32 +19,12 @@ namespace ly
 
 	Ref<sf::Texture> AssetManager::LoadTexture(const std::string& filepath)
 	{
-		if (m_LoadedTextureMap.find(filepath) != m_LoadedTextureMap.end())
-			return m_LoadedTextureMap[filepath];
-
-		Ref<sf::Texture> texture = CreateRef<sf::Texture>();
-		if (texture->loadFromFile(m_RootDirectory + filepath))
-		{
-			m_LoadedTextureMap[filepath] = texture;
-			return texture;
-		}
-
-		return nullptr;
+		return LoadAsset(filepath, m_LoadedTextureMap);
 	}
 
 	Ref<sf::Font> AssetManager::LoadFont(const std::string& filepath)
 	{
-		if (m_LoadedFontMap.find(filepath) != m_LoadedFontMap.end())
-			return m_LoadedFontMap[filepath];
-
-		Ref<sf::Font> font = CreateRef<sf::Font>();
-		if (font->loadFromFile(m_RootDirectory + filepath))
-		{
-			m_LoadedFontMap[filepath] = font;
-			return font;
-		}
-
-		return nullptr;
+		return LoadAsset(filepath, m_LoadedFontMap);
 	}
 
 	void AssetManager::SetAssetRootDirectory(const std::string& directory)
@@ -54,21 +34,8 @@ namespace ly
 
 	void AssetManager::CleanCycle()
 	{
-		for (auto it = m_LoadedTextureMap.begin(); it != m_LoadedTextureMap.end();)
-		{
-			if (it->second.use_count() == 1)
-				it = m_LoadedTextureMap.erase(it);
-			else
-				it++;
-		}
-
-		for (auto it = m_LoadedFontMap.begin(); it != m_LoadedFontMap.end();)
-		{
-			if (it->second.use_count() == 1)
-				it = m_LoadedFontMap.erase(it);
-			else
-				it++;
-		}
+		CleanUniqueRef(m_LoadedTextureMap);
+		CleanUniqueRef(m_LoadedFontMap);
 	}
 
 }

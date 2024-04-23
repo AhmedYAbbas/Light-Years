@@ -78,7 +78,9 @@ namespace ly
 	bool Application::DispatchEvent(const sf::Event& event)
 	{
 		if (m_CurrentWorld)
-			m_CurrentWorld->DispatchEvent(event);
+			return m_CurrentWorld->DispatchEvent(event);
+
+		return false;
 	}
 
 	void Application::Render()

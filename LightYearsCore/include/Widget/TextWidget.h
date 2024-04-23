@@ -15,7 +15,7 @@ namespace ly
 
 	private:
 		virtual void Draw(sf::RenderWindow& window) override;
-		virtual void UpdatePosition(const sf::Vector2f position) override;
+		virtual void UpdatePosition(const sf::Vector2f& position) override;
 		virtual void UpdateRotation(float rotation) override;
 
 	private:
