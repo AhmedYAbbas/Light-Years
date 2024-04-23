@@ -13,6 +13,11 @@ namespace ly
 		inline void SetString(const std::string& str) { m_Text.setString(str); }
 		inline void SetTextSize(unsigned int size) { m_Text.setCharacterSize(size); }
 
+		inline sf::Text& GetText() { return m_Text; }
+		inline Ref<sf::Font>& GetFont() { return m_Font; }
+
+		virtual sf::FloatRect GetBounds() const override;
+
 	private:
 		virtual void Draw(sf::RenderWindow& window) override;
 		virtual void UpdatePosition(const sf::Vector2f& position) override;

@@ -6,7 +6,10 @@
 namespace ly
 {
 	GameplayHUD::GameplayHUD()
-		: m_FrameRateText{"Frame Rate:"}
+		: m_FrameRateText{"Frame Rate:"},
+		m_NormalHealthBarColor{128, 255, 128},
+		m_CriticalHealthBarColor{255, 0, 0},
+		m_CriticalThreshold{0.3}
 	{
 		m_FrameRateText.SetTextSize(30);
 	}
@@ -35,6 +38,10 @@ namespace ly
 	void GameplayHUD::OnPlayerHealthUpdated(float amount, float currentHealth, float maxHealth)
 	{
 		m_PlayerHealthBar.UpdateValue(currentHealth, maxHealth);
+		if (currentHealth / maxHealth <= m_CriticalThreshold)
+			m_PlayerHealthBar.SetForegroundColor(m_CriticalHealthBarColor);
+		else
+			m_PlayerHealthBar.SetForegroundColor(m_NormalHealthBarColor);
 	}
 
 	void GameplayHUD::OnPlayerSpaceshipDestroyed(Actor* destroyedPlayerSpaceship)
@@ -52,6 +59,7 @@ namespace ly
 			HealthComponent& healthComp = player->GetCurrentSpaceship().lock()->GetHealthComponent();
 			healthComp.OnHealthChanged.Bind(GetWeakRef(), &GameplayHUD::OnPlayerHealthUpdated);
 			m_PlayerHealthBar.UpdateValue(healthComp.GetHealth(), healthComp.GetMaxHealth());
+			OnPlayerHealthUpdated(0, healthComp.GetHealth(), healthComp.GetMaxHealth());
 		}
 	}
 }

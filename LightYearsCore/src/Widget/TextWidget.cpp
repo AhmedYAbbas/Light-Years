@@ -8,6 +8,11 @@ namespace ly
 	{
 	}
 
+	sf::FloatRect TextWidget::GetBounds() const
+	{
+		return m_Text.getGlobalBounds();
+	}
+
 	void TextWidget::Draw(sf::RenderWindow& window)
 	{
 		window.draw(m_Text);

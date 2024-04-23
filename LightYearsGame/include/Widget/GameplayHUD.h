@@ -25,5 +25,8 @@ namespace ly
 	private:
 		TextWidget m_FrameRateText;
 		ValueGauge m_PlayerHealthBar;
+		sf::Color m_NormalHealthBarColor;
+		sf::Color m_CriticalHealthBarColor;
+		float m_CriticalThreshold;
 	};
 }

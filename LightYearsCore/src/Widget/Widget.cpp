@@ -25,6 +25,17 @@ namespace ly
 		UpdateRotation(rotation);
 	}
 
+	sf::FloatRect Widget::GetBounds() const
+	{
+		return sf::FloatRect();
+	}
+
+	sf::Vector2f Widget::GetCenterPosition() const
+	{
+		sf::FloatRect bounds = GetBounds();
+		return sf::Vector2f {bounds.left + bounds.width / 2.f, bounds.top + bounds.height / 2.f};
+	}
+
 	Widget::Widget()
 		: m_Transform{}, m_IsVisible{true}
 	{
