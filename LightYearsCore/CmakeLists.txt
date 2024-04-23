@@ -50,6 +50,9 @@ add_library(${LIGHT_YEARS_CORE_TARGET_NAME} STATIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Widget/TextWidget.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Widget/TextWidget.cpp
 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Widget/Button.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Widget/Button.cpp
+
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Widget/ValueGauge.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Widget/ValueGauge.cpp
 )

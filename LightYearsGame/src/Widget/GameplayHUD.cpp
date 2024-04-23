@@ -20,6 +20,7 @@ namespace ly
 		m_FrameRateText.SetTextSize(30);
 		m_PlayerLifeCountText.SetTextSize(20);
 		m_PlayerScoreText.SetTextSize(20);
+		m_TestButton.GetTextWidget().SetTextSize(30);
 	}
 
 	void GameplayHUD::Draw(sf::RenderWindow& window)
@@ -30,6 +31,7 @@ namespace ly
 		m_PlayerLifeCountText.NativeDraw(window);
 		m_PlayerScoreIcon.NativeDraw(window);
 		m_PlayerScoreText.NativeDraw(window);
+		m_TestButton.NativeDraw(window);
 	}
 
 	void GameplayHUD::Tick(float deltaTime)
@@ -57,6 +59,8 @@ namespace ly
 		
 		nextWidgetPosition += {m_PlayerScoreIcon.GetBounds().width + m_WidgetSpacing, 0.f};
 		m_PlayerScoreText.SetWidgetPosition(nextWidgetPosition);
+
+		m_TestButton.SetWidgetPosition({windowSize.x / 2.f, windowSize.y / 2.f});
 
 		RefreshHealthBar();
 		SetupPlayerStatus();

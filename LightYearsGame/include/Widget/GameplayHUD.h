@@ -4,6 +4,7 @@
 #include <Widget/TextWidget.h>
 #include <Widget/ValueGauge.h>
 #include <Widget/ImageWidget.h>
+#include <Widget/Button.h>
 
 namespace ly
 {
@@ -34,6 +35,8 @@ namespace ly
 		TextWidget m_PlayerLifeCountText;
 		ImageWidget m_PlayerScoreIcon;
 		TextWidget m_PlayerScoreText;
+
+		Button m_TestButton;
 
 		sf::Color m_NormalHealthBarColor;
 		sf::Color m_CriticalHealthBarColor;
