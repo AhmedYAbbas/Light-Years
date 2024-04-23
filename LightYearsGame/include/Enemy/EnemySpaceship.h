@@ -8,7 +8,18 @@ namespace ly
 	class EnemySpaceship : public Spaceship
 	{
 	public:
-		EnemySpaceship(World* world, const std::string& texturePath, float collisionDamage = 200.f, Vector<RewardFactoryFunc> rewards = {CreateHealthReward, CreateThreeWayShooterReward, CreateFrontalWiperShooterReward});
+		EnemySpaceship(World* world,
+			const std::string& texturePath,
+			float collisionDamage = 200.f,
+			float rewardSpawnWeight = 0.5f,
+			Vector<RewardFactoryFunc> rewards = 
+			{
+				CreateHealthReward,
+				CreateThreeWayShooterReward,
+				CreateFrontalWiperShooterReward,
+				CreateLifeReward
+			}
+		);
 
 		inline void SetScoreAwardAmount(int amount) { m_ScoreAwardAmount = amount; }
 
@@ -24,6 +35,7 @@ namespace ly
 	private:
 		float m_CollisionDamage;
 		int m_ScoreAwardAmount;
+		float m_RewardSpawnWeight;
 		Vector<RewardFactoryFunc> m_RewardFactories;
 	};
 }

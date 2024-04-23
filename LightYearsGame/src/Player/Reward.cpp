@@ -60,6 +60,11 @@ namespace ly
 		return CreateReward(world, "SpaceShooterRedux/PNG/pickups/front_row_shooter_pickup.png", RewardFrontalWiperShooter);
 	}
 
+	WeakRef<Reward> CreateLifeReward(World* world)
+	{
+		return CreateReward(world, "SpaceShooterRedux/PNG/pickups/playerLife1_blue.png", RewardLife);
+	}
+
 	WeakRef<Reward> CreateReward(World* world, const std::string& texturePath, RewardFunc rewardFunc)
 	{
 		return world->SpawnActor<Reward>(texturePath, rewardFunc);
@@ -82,5 +87,13 @@ namespace ly
 	{
 		if (player && !player->IsPendingDestroy())
 			player->SetShooter(CreateScope<FrontalWiper>(player, 0.4f, sf::Vector2f {50.f, 0.f}));
+	}
+
+	void RewardLife(PlayerSpaceship* player)
+	{
+		if (!PlayerManager::Get().GetPlayer())
+			return;
+
+		PlayerManager::Get().GetPlayer()->AddLifeCount(1);
 	}
 }

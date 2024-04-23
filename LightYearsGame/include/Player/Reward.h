@@ -30,10 +30,12 @@ namespace ly
 	WeakRef<Reward> CreateHealthReward(World* world);
 	WeakRef<Reward> CreateThreeWayShooterReward(World* world);
 	WeakRef<Reward> CreateFrontalWiperShooterReward(World* world);
+	WeakRef<Reward> CreateLifeReward(World* world);
 
 	WeakRef<Reward> CreateReward(World* world, const std::string& texturePath, RewardFunc rewardFunc);
 
 	void RewardHealth(PlayerSpaceship* player);
 	void RewardThreeWayShooter(PlayerSpaceship* player);
 	void RewardFrontalWiperShooter(PlayerSpaceship* player);
+	void RewardLife(PlayerSpaceship* player);
 }

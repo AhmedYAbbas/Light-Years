@@ -29,16 +29,17 @@ namespace ly
 
 	void GameLevelOne::InitGameStages()
 	{
-		AddStage(Ref<UFOStage>{CreateRef<UFOStage>(this)});
-
 		AddStage(Ref<WaitStage>{CreateRef<WaitStage>(this, 5.f)});
 		AddStage(Ref<VanguardStage>{CreateRef<VanguardStage>(this)});
 
 		AddStage(Ref<WaitStage>{CreateRef<WaitStage>(this, 15.f)});
 		AddStage(Ref<TwinBladeStage>{CreateRef<TwinBladeStage>(this)});
 
-		AddStage(Ref<WaitStage>{CreateRef<WaitStage>(this, 15.f)});
+		AddStage(Ref<WaitStage>{CreateRef<WaitStage>(this, 12.f)});
 		AddStage(Ref<HexagonStage>{CreateRef<HexagonStage>(this)});
+
+		AddStage(Ref<WaitStage>{CreateRef<WaitStage>(this, 10.f)});
+		AddStage(Ref<UFOStage>{CreateRef<UFOStage>(this)});
 	}
 
 	void GameLevelOne::OnPlayerSpaceshipDestroyed(Actor* destroyedPlayerSpaceship)
