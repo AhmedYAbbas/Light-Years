@@ -2,7 +2,7 @@
 #include "Framework/Actor.h"
 #include "Framework/Application.h"
 #include "Gameplay/GameStage.h"
-
+#include "Widget/HUD.h"
 
 namespace ly
 {
@@ -41,12 +41,17 @@ namespace ly
 			m_CurrentStage->get()->TickStage(deltaTime);
 
 		Tick(deltaTime);
+
+		if (m_HUD && m_HUD->IsInit())
+			m_HUD->NativeInit(Application::Get().GetWindow());
 	}
 
 	void World::Render(sf::RenderWindow& window)
 	{
 		for (auto& actor : m_Actors)
 			actor->Render(window);
+
+		RenderHUD(window);
 	}
 
 	sf::Vector2u World::GetWindowSize() const
@@ -70,6 +75,12 @@ namespace ly
 		m_GameStages.push_back(stage);
 	}
 
+	bool World::DispatchEvent(const sf::Event& event)
+	{
+		if (m_HUD)
+			return m_HUD->HandleEvent(event);
+	}
+
 	void World::BeginPlay()
 	{
 	}
@@ -85,6 +96,12 @@ namespace ly
 	void World::AllGameStagesFinished()
 	{
 		LOG("All Stages Finished!");
+	}
+
+	void World::RenderHUD(sf::RenderWindow& window)
+	{
+		if (m_HUD)
+			m_HUD->Draw(window);
 	}
 
 	void World::NextGameStage()

@@ -29,6 +29,8 @@ namespace ly
 				{
 					m_Window.close();
 				}
+				else
+					DispatchEvent(event);
 			}
 
 			float frameDeltaTime = m_TickClock.restart().asSeconds();
@@ -71,6 +73,12 @@ namespace ly
 		m_Window.clear();
 		Render();
 		m_Window.display();
+	}
+
+	bool Application::DispatchEvent(const sf::Event& event)
+	{
+		if (m_CurrentWorld)
+			m_CurrentWorld->DispatchEvent(event);
 	}
 
 	void Application::Render()

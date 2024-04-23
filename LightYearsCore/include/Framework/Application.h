@@ -24,6 +24,8 @@ namespace ly
 			return newWorld;
 		}
 
+		sf::RenderWindow& GetWindow() { return m_Window; }
+		const sf::RenderWindow& GetWindow() const { return m_Window; }
 		sf::Vector2u GetWindowSize() const { return m_Window.getSize(); }
 
 	protected:
@@ -35,6 +37,7 @@ namespace ly
 	private:
 		void TickInternal(float deltaTime);
 		void RenderInternal();
+		bool DispatchEvent(const sf::Event& event);
 
 	private:
 		sf::RenderWindow m_Window;

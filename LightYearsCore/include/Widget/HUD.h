@@ -12,7 +12,7 @@ namespace ly
 		virtual void Draw(sf::RenderWindow& window) = 0;
 		virtual bool HandleEvent(const sf::Event& event);
 
-		void NativeInit(sf::RenderWindow& window);
+		void NativeInit(const sf::RenderWindow& window);
 		inline bool IsInit() const { return m_IsInit; }
 
 	protected:

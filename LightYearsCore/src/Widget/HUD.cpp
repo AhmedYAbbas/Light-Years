@@ -7,7 +7,7 @@ namespace ly
 		return false;
 	}
 
-	void HUD::NativeInit(sf::RenderWindow& window)
+	void HUD::NativeInit(const sf::RenderWindow& window)
 	{
 		if (!m_IsInit)
 		{
