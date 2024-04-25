@@ -1,6 +1,6 @@
 # Light Years Game and Game Engine
 
-Welcome to the repository for Light Years, ​a space-shooter action game/game engine built with C++ and SFML.​ game/game engine built with C++ and SFML.
+Welcome to the repository for Light Years, ​a space-shooter action game/game engine built with C++ and SFML.​
 
 ## Building
 
