@@ -10,6 +10,7 @@
 #include "Enemy/HexagonStage.h"
 #include "Enemy/UFOStage.h"
 #include "Enemy/ChaosStage.h"
+#include "Enemy/BossStage.h"
 
 #include "Widget/GameplayHUD.h"
 
@@ -30,8 +31,7 @@ namespace ly
 
 	void GameLevelOne::InitGameStages()
 	{
-		AddStage(Ref<ChaosStage>{CreateRef<ChaosStage>(this)});
-
+		AddStage(Ref<BossStage>{CreateRef<BossStage>(this)});
 
 		AddStage(Ref<WaitStage>{CreateRef<WaitStage>(this, 5.f)});
 		AddStage(Ref<VanguardStage>{CreateRef<VanguardStage>(this)});
@@ -44,6 +44,9 @@ namespace ly
 
 		AddStage(Ref<WaitStage>{CreateRef<WaitStage>(this, 10.f)});
 		AddStage(Ref<UFOStage>{CreateRef<UFOStage>(this)});
+
+		AddStage(Ref<WaitStage>{CreateRef<WaitStage>(this, 10.f)});
+		AddStage(Ref<ChaosStage>{CreateRef<ChaosStage>(this)});
 	}
 
 	void GameLevelOne::OnPlayerSpaceshipDestroyed(Actor* destroyedPlayerSpaceship)

@@ -12,6 +12,14 @@ namespace ly
 		SetTeamID(2);
 	}
 
+	void EnemySpaceship::SetRewardSpawnWeight(float weight)
+	{
+		if (weight < 0 || weight > 1)
+			return;
+
+		m_RewardSpawnWeight = weight;
+	}
+
 	void EnemySpaceship::Tick(float deltaTime)
 	{
 		Spaceship::Tick(deltaTime);

@@ -11,7 +11,7 @@ namespace ly
 		: Spaceship {world, filepath},
 		m_MoveInput {0, 0},
 		m_Speed {200.f},
-		m_Shooter {CreateScope<BulletShooter>(this, 0.1f, sf::Vector2f{50.f, 0.f})},
+		m_Shooter {CreateScope<ThreeWayShooter>(this, 0.3f, sf::Vector2f{50.f, 0.f})},
 		m_InvulnerableTime {2.f},
 		m_Invulnerable {true},
 		m_InvulnerableFlashInterval {0.5f},
@@ -19,6 +19,7 @@ namespace ly
 		m_InvulnerableFlashDirection {1.f}
 	{
 		SetTeamID(1);
+		m_Shooter->SetCurrentLevel(4);
 	}
 
 	void PlayerSpaceship::Tick(float deltaTime)
@@ -31,8 +32,6 @@ namespace ly
 
 	void PlayerSpaceship::Shoot()
 	{
-		Spaceship::Shoot();
-
 		if (m_Shooter)
 			m_Shooter->Shoot();
 	}

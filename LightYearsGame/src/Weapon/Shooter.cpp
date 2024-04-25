@@ -16,6 +16,11 @@ namespace ly
 		m_CurrentLevel += amount;
 	}
 
+	void Shooter::SetCurrentLevel(int level)
+	{
+		m_CurrentLevel = level;
+	}
+
 	Shooter::Shooter(Actor* owner)
 		: m_Owner{owner}, m_CurrentLevel{1}, m_MaxLevel{4}
 	{

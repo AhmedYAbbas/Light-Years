@@ -22,6 +22,7 @@ namespace ly
 		);
 
 		inline void SetScoreAwardAmount(int amount) { m_ScoreAwardAmount = amount; }
+		void SetRewardSpawnWeight(float weight);
 
 	protected:
 		virtual void Tick(float deltaTime) override;

@@ -17,6 +17,7 @@ namespace ly
 		inline int GetMaxLevel() const { return m_MaxLevel; }
 
 		virtual void IncrementLevel(int amount = 1);
+		virtual void SetCurrentLevel(int level);
 
 	protected:
 		Shooter(Actor* owner);
