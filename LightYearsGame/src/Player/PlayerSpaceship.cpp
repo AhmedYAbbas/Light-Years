@@ -19,7 +19,6 @@ namespace ly
 		m_InvulnerableFlashDirection {1.f}
 	{
 		SetTeamID(1);
-		m_Shooter->SetCurrentLevel(4);
 	}
 
 	void PlayerSpaceship::Tick(float deltaTime)

@@ -26,6 +26,8 @@ namespace ly
 		void Quit();
 		void Restart();
 
+		void SpawnCosmetics();
+
 	private:
 		WeakRef<PlayerSpaceship> m_PlayerSpaceship;
 		WeakRef<GameplayHUD> m_GameplayHUD;

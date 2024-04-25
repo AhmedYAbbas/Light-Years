@@ -23,7 +23,8 @@ namespace ly
 		void TickInternal(float deltaTime);
 
 		void SetTexture(const std::string& filepath);
-		void Render(sf::RenderWindow& window);
+		void SetTextureRepeated(bool repeated);
+		virtual void Render(sf::RenderWindow& window);
 
 		void SetActorLocation(const sf::Vector2f& pos);
 		void SetActorRotation(float angle);

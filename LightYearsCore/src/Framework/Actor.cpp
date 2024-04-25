@@ -167,4 +167,9 @@ namespace ly
 			CenterPivot();
 		}
 	}
+
+	void Actor::SetTextureRepeated(bool repeated)
+	{
+		m_Texture->setRepeated(repeated);
+	}
 }
