@@ -19,15 +19,23 @@ namespace ly
 		virtual void Tick(float deltaTime) override;
 		virtual bool HandleEvent(const sf::Event& event) override;
 
+		void GameFinished(bool playerWon);
+
 	private:
 		virtual void Init(const sf::RenderWindow& window) override;
 		void OnPlayerHealthUpdated(float amount, float currentHealth, float maxHealth);
 		void OnPlayerSpaceshipDestroyed(Actor* destroyedPlayerSpaceship);
 		void OnPlayerLifeCountUpdated(int count);
 		void OnPlayerScoreChanged(int score);
-
 		void RefreshHealthBar();
 		void SetupPlayerStatus();
+
+		void RestartButtonClicked();
+		void QuitButtonClicked();
+
+	public:
+		Delegate<> OnRestartButtonClicked;
+		Delegate<> OnQuitButtonClicked;
 
 	private:
 		TextWidget m_FrameRateText;
@@ -42,5 +50,10 @@ namespace ly
 		float m_CriticalThreshold;
 
 		float m_WidgetSpacing;
+
+		TextWidget m_WinLoseText;
+		TextWidget m_FinalScoreText;
+		Button m_RestartButton;
+		Button m_QuitButton;
 	};
 }

@@ -14,6 +14,7 @@ namespace ly
 		Player& CreateNewPlayer();
 		Player* GetPlayer(int index = 0);
 		const Player* GetPlayer(int index = 0) const;
+		void Reset();
 
 	protected:
 		PlayerManager() = default;

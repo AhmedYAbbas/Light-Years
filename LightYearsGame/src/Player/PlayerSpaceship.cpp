@@ -11,7 +11,7 @@ namespace ly
 		: Spaceship {world, filepath},
 		m_MoveInput {0, 0},
 		m_Speed {200.f},
-		m_Shooter {CreateScope<ThreeWayShooter>(this, 0.3f, sf::Vector2f{50.f, 0.f})},
+		m_Shooter {CreateScope<BulletShooter>(this, 0.5f, sf::Vector2f{50.f, 0.f})},
 		m_InvulnerableTime {2.f},
 		m_Invulnerable {true},
 		m_InvulnerableFlashInterval {0.5f},

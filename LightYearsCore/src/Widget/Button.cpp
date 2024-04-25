@@ -23,6 +23,9 @@ namespace ly
 
 	bool Button::HandleEvent(const sf::Event& event)
 	{
+		if (!IsVisible())
+			return false;
+
 		bool handled = Widget::HandleEvent(event);
 		if (event.type == sf::Event::MouseButtonReleased)
 		{
