@@ -141,6 +141,7 @@ namespace ly
 		if (m_PhysicsBody)
 		{
 			PhysicsSystem::Get().RemoveListener(m_PhysicsBody);
+			m_PhysicsBody->GetUserData().pointer = reinterpret_cast<uintptr_t>(nullptr);
 			m_PhysicsBody = nullptr;
 		}
 	}
